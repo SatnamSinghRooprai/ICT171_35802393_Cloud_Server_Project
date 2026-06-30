@@ -43,7 +43,7 @@ Setup Elastic IP:
 
 ## 3. Connect to EC2 instance on AWS
 - Click on the connect button present on the top of the instance panel.
-or  
+#or access the server remotely, using the command in the command prompt or vitual machine  
 ```Use bash to login to the machine remotely
 chmod 400 satnam-key.pem
 ssh -i "your_key_name.pem" ubuntu@YOUR_ELASTIC_IP
