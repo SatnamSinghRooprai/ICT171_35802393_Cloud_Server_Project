@@ -95,7 +95,7 @@ sudo nano /var/www/html/index.html
 ```
 sudo truncate -s 0 /var/www/html/index.html
 ```
-5.3 Create a HTML file and add the code 
+5.3 Create a HTML file and add the code (you can access the code from code.md file in this repository) 
 ```
 sudo nano CyberPath.html
 ```
