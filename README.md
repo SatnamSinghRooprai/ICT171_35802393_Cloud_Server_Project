@@ -91,6 +91,46 @@ All setup steps and project details are documented clearly in GitHub.
 ### ✔ Video Explainer
 A walkthrough video demonstrates the deployment process from start to finish.
 
+------------------------------------------------------------------------------------------------
+
+
+Each file provides clear documentation so another ICT171 student could rebuild the project independently.
+
 ---
 
-## 6. Repository Structure
+## 7. Live Deployment
+The CyberPath website is publicly accessible through:
+
+- **Elastic IP:** 13.50.124.14  
+- **Domain:** pending_domain.com  
+- **Status:** Online and secure (HTTPS enabled)
+
+This demonstrates successful cloud deployment, DNS configuration, and SSL/TLS implementation.
+
+---
+
+## 8. Video Explainer
+A full walkthrough video is included in the repository, showing:
+
+- EC2 setup  
+- Web server configuration  
+- DNS linking  
+- SSL activation  
+- Uploading the website  
+- Running the quiz live  
+- Reviewing documentation  
+
+*(Video yet to be added)*
+
+---
+
+## 9. License
+This project is licensed under **CC BY 4.0**, allowing sharing and adaptation with proper attribution.
+
+---
+
+## 10. Conclusion
+CyberPath is a practical, cloud‑hosted educational tool that helps users discover cybersecurity career paths based on their thinking style and interests.  
+It demonstrates real‑world cloud deployment skills, web development fundamentals, scripting logic, and professional documentation — all core outcomes of ICT171.
+
+
