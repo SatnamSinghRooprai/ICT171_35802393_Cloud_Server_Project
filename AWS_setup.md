@@ -48,24 +48,24 @@ Setup Elastic IP:
 ```
 sudo apt update
 sudo apt upgrade -y
-
+```
 3.2 Installing Apache2 Web Server
 ```
 sudo apt install apache2 -y
-
+```
 3.3 Enable Apache on Boot
 ```
 sudo systemctl enable apache2
-
-3.4 Start Apache
 ```
+3.4 Start Apache
+
 sudo sytemctl start apache2
 
 3.5 Verify Apache Status
-```
+
 systemctl status apache2
 
-```
+
 
 
 
