@@ -2,7 +2,7 @@
 CyberPath — ICT171 Cloud Server Project  
 Satnam Singh Rooprai - 35802393
 
----------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
 
 ## 1. Overview
 This document explains how the CyberPath Quiz website (HTML, CSS, JavaScript) was deployed on an AWS EC2 Ubuntu 24.04 server using Apache2.  
@@ -44,6 +44,13 @@ Setup Elastic IP:
 ## 3. Connect to EC2 instance on AWS
 - Click on the connect button present on the top of the instance panel on AWS. Once you  enter the Virtual Machine terminal follow the below given commands to successfully setup this server. 
 
+## Access the server remotely 
+
+Use bash to login to the machine remotely
+```
+chmod 400 satnam-key.pem
+ssh -i "your_key_name.pem" ubuntu@YOUR_ELASTIC_IP
+```
 3.1 Preparing the server
 ```
 sudo apt update
@@ -58,20 +65,52 @@ sudo apt install apache2 -y
 sudo systemctl enable apache2
 ```
 3.4 Start Apache
-
+```
 sudo sytemctl start apache2
-
+```
 3.5 Verify Apache Status
-
+```
 systemctl status apache2
+```
+## 4. Configuring Firewall
+4.1 Allow Apache Traffic
+```
+sudo ufw allow 'Apache'
+```
+4.2 Enable firewall
+```
+sudo ufw enable
+```
+4.3 check firewall status
+```
+sudo ufw status
+```
+
+## 5. Configuring Apache2 with website code 
+5.1 Accessing the apache2 webpage
+```
+sudo nano /var/www/html/index.html
+```
+5.2 Delete the current code of web-server (optional)
+```
+sudo truncate -s 0 /var/www/html/index.html
+```
+5.3 Create a HTML file and add the code 
+```
+sudo nano CyberPath.html
+```
+5.4 moving the HTML file to apache2 web-server
+```
+mv CyberPath.html /var/www/html/index.html
+```
+5.5 Reload the server
+```
+sudo systmectl reload apache2
+```
+5.6 If the terminal throughs an error use this command to notify LINUX that a service file has been edited.
+```
+sudo systemctl deamon-reload
+sudo systemctl reload apache2
+```
 
 
-
-
-
-
-## Access the server remotely 
-
-```Use bash to login to the machine remotely
-chmod 400 satnam-key.pem
-ssh -i "your_key_name.pem" ubuntu@YOUR_ELASTIC_IP
