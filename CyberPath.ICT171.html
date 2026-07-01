@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberPath — Find Your Cybersecurity Career</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:         #080d18;
+    --surface:    #0f1829;
+    --surface2:   #151f35;
+    --border:     #1e2d4a;
+    --indigo:     #6366f1;
+    --indigo-dim: rgba(99,102,241,0.12);
+    --violet:     #a78bfa;
+    --green:      #4ade80;
+    --text:       #c8d8f0;
+    --muted:      #5a7090;
+    --white:      #eef4ff;
+    --sans:       'Inter', system-ui, sans-serif;
+    --display:    'Syne', system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  /* ── CHANGE 1: body is a flex column so hero fills remaining height ── */
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ═══ STICKY PROGRESS BAR ═══ */
+  .progress-shell {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(8,13,24,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+  }
+  .progress-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .progress-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--muted);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .progress-label span { color: var(--violet); }
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: var(--surface2);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--indigo), var(--violet));
+    border-radius: 99px;
+    transition: width 0.45s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* ═══ HERO — fills viewport, content centred ═══ */
+  header.hero {
+    position: relative;
+    overflow: hidden;
+    /* CHANGE 1a: fill remaining viewport height */
+    flex: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* CHANGE 1b: generous side margins */
+    padding: 64px 48px;
+    text-align: center;
+    background: radial-gradient(ellipse 100% 70% at 50% -10%, #111a3a 0%, var(--bg) 65%);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .compass { position: relative; width: 88px; height: 88px; margin: 0 auto 32px; }
+  .compass-ring {
+    width: 88px; height: 88px; border-radius: 50%;
+    border: 2px solid var(--border); position: absolute; top: 0; left: 0;
+    animation: spin 18s linear infinite;
+  }
+  .compass-ring::before {
+    content: ''; position: absolute; top: -4px; left: 50%;
+    transform: translateX(-50%); width: 7px; height: 7px;
+    border-radius: 50%; background: var(--indigo); box-shadow: 0 0 10px var(--indigo);
+  }
+  .compass-inner {
+    position: absolute; inset: 13px; border-radius: 50%;
+    background: var(--surface2); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center; font-size: 1.7rem;
+  }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  .eyebrow {
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--indigo); margin-bottom: 18px; display: block;
+  }
+
+  /* CHANGE 1c: larger headline */
+  header.hero h1 {
+    font-family: var(--display);
+    font-size: clamp(2.4rem, 8vw, 4rem);
+    font-weight: 800; letter-spacing: -0.04em; color: var(--white); line-height: 1.08;
+  }
+  header.hero h1 em { font-style: normal; color: var(--violet); }
+
+  /* CHANGE 1d: wider, larger subtitle */
+  .hero-sub {
+    margin-top: 20px;
+    font-size: 1.08rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  /* CHANGE 1e: larger CTA button */
+  .start-btn {
+    margin-top: 40px;
+    background: linear-gradient(135deg, var(--indigo), #4f46e5);
+    color: white;
+    border: none;
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 18px 48px;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 8px 28px rgba(99,102,241,0.4);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    letter-spacing: 0.01em;
+  }
+  .start-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(99,102,241,0.5); }
+  .start-btn:active { transform: translateY(0); }
+  .start-btn:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; }
+
+  .meta-bar {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 36px;
+  }
+  .chip {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 6px; padding: 6px 16px; font-size: 0.8rem; font-weight: 500; color: var(--muted);
+  }
+
+  /* ═══ QUIZ SECTION ═══ */
+  main {
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 48px 24px 100px;
+    display: none;
+    flex-direction: column;
+    gap: 18px;
+    flex: 1;
+  }
+  main.active { display: flex; }
+
+  .q-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(14px);
+    animation: cardIn 0.5s ease forwards;
+  }
+  @keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
+
+  .q-head {
+    display: flex; align-items: center; gap: 12px;
+    padding: 18px 24px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+  }
+  .q-num {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: var(--indigo-dim); border: 1px solid rgba(99,102,241,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: 700; color: var(--violet);
+    flex-shrink: 0; font-family: var(--display);
+  }
+  .q-tag {
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .q-body { padding: 26px 26px 22px; }
+  .q-text {
+    font-size: 1.08rem; font-weight: 600; color: var(--white);
+    margin-bottom: 20px; line-height: 1.5;
+  }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+
+  /* CHANGE 1f: options are flex rows so letter badge + text always align */
+  .opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    text-align: left;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    color: var(--text);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+    line-height: 1.5;
+  }
+  .opt:hover { border-color: rgba(99,102,241,0.5); background: #19233b; }
+  .opt:active { transform: scale(0.99); }
+  .opt.selected { border-color: var(--indigo); background: var(--indigo-dim); color: var(--white); }
+  .opt:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+
+  .opt-letter {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--surface); border: 1px solid var(--border);
+    font-size: 0.7rem; font-weight: 700; color: var(--muted);
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .opt.selected .opt-letter { background: var(--indigo); border-color: var(--indigo); color: white; }
+
+  /* text wraps cleanly to its own column, never under the badge */
+  .opt-text { flex: 1; }
+
+  /* ═══ NAV CONTROLS ═══ */
+  .nav-row {
+    display: flex; justify-content: space-between; align-items: center; margin-top: 8px;
+  }
+  .nav-btn {
+    background: var(--surface2); border: 1px solid var(--border);
+    color: var(--text); font-family: var(--sans); font-weight: 600;
+    font-size: 0.85rem; padding: 11px 22px; border-radius: 9px; cursor: pointer;
+    transition: border-color 0.15s ease, opacity 0.15s ease;
+  }
+  .nav-btn:hover { border-color: rgba(99,102,241,0.5); }
+  .nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .nav-btn.primary { background: linear-gradient(135deg, var(--indigo), #4f46e5); border: none; color: white; }
+  .nav-btn:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+
+  /* ═══ RESULTS ═══ */
+  .results { display: none; flex-direction: column; gap: 20px; }
+  .results.active { display: flex; }
+
+  .result-hero {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 40px 30px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .result-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(99,102,241,0.15) 0%, transparent 70%);
+  }
+  .result-icon { font-size: 3rem; margin-bottom: 14px; position: relative; }
+  .result-eyebrow {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--indigo); margin-bottom: 10px; position: relative;
+  }
+  .result-title {
+    font-family: var(--display); font-size: clamp(1.6rem, 5vw, 2.2rem);
+    font-weight: 800; color: var(--white); letter-spacing: -0.02em; position: relative;
+  }
+  .result-desc {
+    margin-top: 14px; color: var(--text); font-size: 0.95rem;
+    max-width: 520px; margin-left: auto; margin-right: auto;
+    position: relative; line-height: 1.7;
+  }
+  .result-section { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+  .result-section-head {
+    display: flex; align-items: center; gap: 10px; padding: 14px 22px;
+    background: var(--surface2); border-bottom: 1px solid var(--border);
+  }
+  .result-section-head h3 {
+    font-family: var(--display); font-size: 0.82rem; color: var(--violet);
+    text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700;
+  }
+  .result-section-body { padding: 22px 24px; }
+
+  .resp-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .resp-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 0.88rem; color: var(--text); }
+  .resp-list li::before { content: '→'; color: var(--violet); font-weight: 700; flex-shrink: 0; }
+
+  /* CHANGE 2a: cert grid fits 3 per row, items are clickable anchor tags */
+  .cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .cert-item {
+    display: flex; align-items: center; justify-content: center;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 9px; padding: 14px 10px; text-align: center;
+    font-size: 0.82rem; font-weight: 600; color: var(--white);
+    text-decoration: none;
+    transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+  }
+  .cert-item:hover { border-color: var(--indigo); background: var(--indigo-dim); transform: translateY(-2px); }
+
+  /* CHANGE 2b: resource items are clickable anchor tags */
+  .resource-list { display: flex; flex-direction: column; gap: 12px; }
+  .resource-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 12px 14px; background: var(--surface2);
+    border: 1px solid var(--border); border-radius: 9px;
+    text-decoration: none;
+    transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+  }
+  .resource-item:hover { border-color: var(--indigo); background: #19233b; transform: translateY(-2px); }
+  .resource-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+  .resource-name { font-size: 0.87rem; font-weight: 600; color: var(--white); }
+  .resource-note { font-size: 0.8rem; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+
+  /* trait bars */
+  .trait-bars { display: flex; flex-direction: column; gap: 12px; }
+  .trait-row { display: flex; align-items: center; gap: 12px; }
+  .trait-name { width: 130px; flex-shrink: 0; font-size: 0.8rem; font-weight: 600; color: var(--muted); }
+  .trait-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 99px; overflow: hidden; }
+  .trait-fill {
+    height: 100%; border-radius: 99px;
+    background: linear-gradient(90deg, var(--indigo), var(--violet));
+    width: 0%; transition: width 1s cubic-bezier(.4,0,.2,1);
+  }
+  .trait-pct { width: 38px; text-align: right; font-size: 0.78rem; color: var(--muted); font-variant-numeric: tabular-nums; flex-shrink: 0; }
+
+  .retake-btn {
+    align-self: center; margin-top: 6px; background: transparent;
+    border: 1px solid var(--border); color: var(--muted);
+    font-family: var(--sans); font-weight: 600; font-size: 0.85rem;
+    padding: 11px 26px; border-radius: 9px; cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .retake-btn:hover { border-color: var(--violet); color: var(--violet); }
+  .retake-btn:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+
+  footer {
+    background: var(--surface); border-top: 1px solid var(--border);
+    text-align: center; padding: 24px 20px;
+    font-size: 0.76rem; color: var(--muted); line-height: 2;
+  }
+  footer a { color: var(--violet); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    header.hero { padding: 48px 24px; }
+    .cert-grid { grid-template-columns: 1fr 1fr; }
+    .q-body { padding: 20px 18px; }
+    .trait-name { width: 100px; font-size: 0.74rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="progress-shell" id="progressShell" style="display:none;">
+    <div class="progress-inner">
+      <div class="progress-label">Question <span id="progNum">1</span> / 10</div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progFill"></div>
+      </div>
+    </div>
+  </div>
+
+  <header class="hero" id="heroSection">
+    <div class="compass">
+      <div class="compass-ring"></div>
+      <div class="compass-inner">🧭</div>
+    </div>
+    <span class="eyebrow">CyberPath — Career Discovery Quiz</span>
+    <h1>Find Your <em>Cybersecurity</em> Career</h1>
+    <p class="hero-sub">10 quick questions about how you think, solve problems, and like to work. No prior security knowledge required — just answer honestly.</p>
+    <button class="start-btn" id="startBtn">Start the Quiz →</button>
+    <div class="meta-bar">
+      <div class="chip">⏱ ~5 minutes</div>
+      <div class="chip">10 questions</div>
+      <div class="chip">6 career paths</div>
+    </div>
+  </header>
+
+  <main id="quizMain"></main>
+
+  <main id="resultsMain">
+    <div class="results" id="resultsBlock"></div>
+  </main>
+
+  <footer>
+    <strong style="color:#a78bfa">CyberPath</strong> &nbsp;|&nbsp;
+    ICT171 Introduction to Server Environments and Architectures &nbsp;|&nbsp; Murdoch University 2026<br>
+    © 2026 Satnam Singh Rooprai - Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
+  </footer>
+
+<script>
+const TRAITS = {
+  aggression:    "Aggression",
+  vigilance:     "Vigilance",
+  curiosity:     "Curiosity",
+  systems:       "Systems Thinking",
+  communication: "Communication",
+  precision:     "Precision"
+};
+
+// CHANGE 2: certs now have { name, url } — 6 per career
+//           freeResources now have { name, note, url } — 5 per career
+const CAREERS = {
+  aggression: {
+    icon: "🔴",
+    title: "Penetration Tester",
+    tagline: "You think like an attacker.",
+    desc: "You're drawn to finding weaknesses before someone else does. Penetration testers are hired to ethically break into systems, networks, and applications — simulating real attacks to expose vulnerabilities before malicious hackers can exploit them. It's hands-on, creative, and constantly evolving.",
+    responsibilities: [
+      "Simulate real-world cyberattacks on client systems with permission",
+      "Identify and document exploitable vulnerabilities",
+      "Write detailed reports explaining how systems were breached",
+      "Recommend fixes to development and security teams"
+    ],
+    certs: [
+      { name: "CompTIA PenTest+",  url: "https://www.comptia.org/certifications/pentest" },
+      { name: "OSCP",              url: "https://www.offsec.com/courses/pen-200/" },
+      { name: "CEH",               url: "https://www.eccouncil.org/train-certify/certified-ethical-hacker-ceh/" },
+      { name: "eJPT",              url: "https://ine.com/certify/ejpt" },
+      { name: "GIAC GPEN",         url: "https://www.giac.org/certifications/penetration-tester-gpen/" },
+      { name: "CPENT",             url: "https://www.eccouncil.org/train-certify/certified-penetration-testing-professional-cpent/" }
+    ],
+    freeResources: [
+      { name: "TryHackMe — Jr Penetration Tester Path", note: "Guided rooms mapped closely to PenTest+ objectives",        url: "https://tryhackme.com/path/outline/jrpenetrationtester" },
+      { name: "Professor Messer — PenTest+ Video Series", note: "Free full video course on YouTube",                        url: "https://www.professormesser.com/pentest-plus/pt0-002/pt0-002-video/pt0-002-training-course/" },
+      { name: "OverTheWire — Bandit Wargame",             note: "Builds core Linux & command line skills",                  url: "https://overthewire.org/wargames/bandit/" },
+      { name: "HackTheBox Academy",                       note: "Free beginner offensive security modules",                 url: "https://academy.hackthebox.com/" },
+      { name: "PortSwigger Web Security Academy",         note: "Free, industry-standard web application pen testing labs", url: "https://portswigger.net/web-security" }
+    ]
+  },
+  vigilance: {
+    icon: "🔵",
+    title: "SOC Analyst",
+    tagline: "You stay calm and catch what others miss.",
+    desc: "Security Operations Centre (SOC) Analysts are the first line of defence — monitoring networks in real time, spotting unusual activity, and responding fast when something looks wrong. If you're detail-oriented and thrive under pressure, this role puts you right at the centre of the action.",
+    responsibilities: [
+      "Monitor security alerts and network traffic around the clock",
+      "Investigate suspicious activity and escalate real threats",
+      "Use SIEM tools to correlate events across systems",
+      "Respond to and help contain active security incidents"
+    ],
+    certs: [
+      { name: "CompTIA Security+",       url: "https://www.comptia.org/certifications/security" },
+      { name: "Microsoft SC-200",        url: "https://learn.microsoft.com/en-us/credentials/certifications/security-operations-analyst/" },
+      { name: "GIAC GSEC",               url: "https://www.giac.org/certifications/security-essentials-gsec/" },
+      { name: "CompTIA CySA+",           url: "https://www.comptia.org/certifications/cybersecurity-analyst" },
+      { name: "BTL1 (Blue Team Level 1)", url: "https://www.securityblue.team/btl1" },
+      { name: "Splunk Core Certified User", url: "https://www.splunk.com/en_us/training/certification-track/splunk-core-certified-user.html" }
+    ],
+    freeResources: [
+      { name: "TryHackMe — SOC Level 1 Path",         note: "Dedicated SOC analyst learning path with hands-on labs",   url: "https://tryhackme.com/path/outline/soclevel1" },
+      { name: "LetsDefend — SOC Fundamentals",         note: "Free intro lessons on SIEM, EDR and incident lifecycle",  url: "https://letsdefend.io/" },
+      { name: "CyberDefenders — Blue Team Labs",       note: "Free alert triage and threat hunting challenges",          url: "https://cyberdefenders.org/" },
+      { name: "Splunk Free Training",                   note: "Official free SIEM fundamentals from Splunk",             url: "https://www.splunk.com/en_us/training/free-courses.html" },
+      { name: "Microsoft Learn — SC-200 Path",          note: "Free official Microsoft security operations training",    url: "https://learn.microsoft.com/en-us/training/courses/sc-200t00" }
+    ]
+  },
+  curiosity: {
+    icon: "🟡",
+    title: "Digital Forensics Investigator",
+    tagline: "You love piecing together the full story.",
+    desc: "Digital forensics investigators dig into compromised systems after an incident, recovering deleted files, tracing attacker footprints, and reconstructing exactly what happened. It's part detective work, part deep technical investigation — ideal if you enjoy methodically uncovering the truth.",
+    responsibilities: [
+      "Recover and analyse digital evidence from compromised systems",
+      "Reconstruct attacker timelines and methods",
+      "Prepare findings for legal or internal investigations",
+      "Work closely with incident response teams"
+    ],
+    certs: [
+      { name: "GIAC GCFA",   url: "https://www.giac.org/certifications/certified-forensic-analyst-gcfa/" },
+      { name: "EnCE",         url: "https://www.opentext.com/products/encase-forensic" },
+      { name: "CHFI",         url: "https://www.eccouncil.org/train-certify/computer-hacking-forensic-investigator-chfi/" },
+      { name: "GIAC GNFA",   url: "https://www.giac.org/certifications/network-forensic-analyst-gnfa/" },
+      { name: "AccessData ACE", url: "https://www.exterro.com/forensic-toolkit/ace-certification" },
+      { name: "BTL1 (Blue Team Level 1)", url: "https://www.securityblue.team/btl1" }
+    ],
+    freeResources: [
+      { name: "CyberDefenders — DFIR Challenges",                note: "Free hands-on forensic investigation labs",              url: "https://cyberdefenders.org/" },
+      { name: "Alison — Diploma in Digital Forensic Investigation", note: "Free course covering acquisition & analysis",          url: "https://alison.com/course/diploma-in-forensic-investigation" },
+      { name: "Magnet Forensics — Free Webinars & Tools",        note: "Industry walkthroughs of real DFIR tooling",             url: "https://www.magnetforensics.com/resources/" },
+      { name: "Autopsy / The Sleuth Kit",                         note: "Free open-source forensic toolkit used industry-wide",  url: "https://www.autopsy.com/" },
+      { name: "SANS DFIR Free Resources",                         note: "Posters, cheat sheets and free DFIR webcasts",          url: "https://www.sans.org/digital-forensics-incident-response/" }
+    ]
+  },
+  systems: {
+    icon: "🟢",
+    title: "Cloud Security Engineer",
+    tagline: "You see the whole architecture, not just the parts.",
+    desc: "Cloud security engineers design and secure the infrastructure that modern businesses run on — AWS, Azure, and similar platforms. You'll build systems that are secure by design, not patched after the fact. Perfect if you enjoy big-picture thinking and building things that scale.",
+    responsibilities: [
+      "Design secure cloud architecture and access controls",
+      "Configure and audit cloud security tools and policies",
+      "Automate security checks within deployment pipelines",
+      "Respond to misconfigurations before they become incidents"
+    ],
+    certs: [
+      { name: "AWS Security Specialty",    url: "https://aws.amazon.com/certification/certified-security-specialty/" },
+      { name: "Azure Security Engineer (AZ-500)", url: "https://learn.microsoft.com/en-us/credentials/certifications/azure-security-engineer/" },
+      { name: "CCSP",                       url: "https://www.isc2.org/certifications/ccsp" },
+      { name: "Google Cloud Security Engineer", url: "https://cloud.google.com/learn/certification/cloud-security-engineer" },
+      { name: "GIAC GCSA",                  url: "https://www.giac.org/certifications/cloud-security-automation-gcsa/" },
+      { name: "CompTIA Cloud+",             url: "https://www.comptia.org/certifications/cloud" }
+    ],
+    freeResources: [
+      { name: "AWS Skill Builder",                          note: "600+ free official AWS courses including security paths",    url: "https://skillbuilder.aws/" },
+      { name: "Microsoft Learn — AZ-500 Path",             note: "Free guided Azure security engineer learning path",          url: "https://learn.microsoft.com/en-us/credentials/certifications/azure-security-engineer/" },
+      { name: "AWS Cloud Quest",                            note: "Free gamified hands-on cloud labs from AWS",                url: "https://aws.amazon.com/training/digital/aws-cloud-quest/" },
+      { name: "Google Cloud Skills Boost",                  note: "Free cloud security learning paths from Google",            url: "https://www.cloudskillsboost.google/" },
+      { name: "CNCF — Free Cloud Native Security Training", note: "Open-source Kubernetes & cloud security resources",         url: "https://www.cncf.io/training/" }
+    ]
+  },
+  communication: {
+    icon: "🟣",
+    title: "GRC Analyst (Governance, Risk & Compliance)",
+    tagline: "You translate complex risk into clear decisions.",
+    desc: "GRC analysts bridge the gap between technical security and business decision-making. You'll assess risk, ensure compliance with regulations and standards, and help leadership understand security in terms they can act on. Ideal if you're a natural communicator who enjoys structure and policy.",
+    responsibilities: [
+      "Assess organisational security risk and compliance gaps",
+      "Develop and maintain security policies and frameworks",
+      "Communicate risk findings to non-technical stakeholders",
+      "Support audits against standards like ISO 27001 or NIST"
+    ],
+    certs: [
+      { name: "CISA",                       url: "https://www.isaca.org/credentialing/cisa" },
+      { name: "CRISC",                      url: "https://www.isaca.org/credentialing/crisc" },
+      { name: "ISO 27001 Lead Implementer", url: "https://www.pecb.com/en/education-and-certification-for-individuals/iso-iec-27001/iso-iec-27001-lead-implementer" },
+      { name: "CISM",                       url: "https://www.isaca.org/credentialing/cism" },
+      { name: "CompTIA Security+",          url: "https://www.comptia.org/certifications/security" },
+      { name: "CGRC",                       url: "https://www.isc2.org/certifications/cgrc" }
+    ],
+    freeResources: [
+      { name: "Coursera — The GRC Approach to Managing Cybersecurity", note: "Free to audit, Kennesaw State University",                   url: "https://www.coursera.org/learn/grc-cybersecurity" },
+      { name: "Alison — Governance, Risk and Compliance (GRC)",        note: "Free course with certificate option",                         url: "https://alison.com/course/fundamentals-of-governance-risk-and-compliance-grc" },
+      { name: "ISACA — Free GRC Resources & Webinars",                  note: "Industry frameworks and practical guidance from ISACA",       url: "https://www.isaca.org/resources" },
+      { name: "NIST Cybersecurity Framework",                           note: "Free official US risk management framework",                  url: "https://www.nist.gov/cyberframework" },
+      { name: "ISO 27001 Free Introduction Guide",                      note: "Free overview of the world's leading security standard",      url: "https://www.iso.org/standard/27001" }
+    ]
+  },
+  precision: {
+    icon: "⚪",
+    title: "Malware Analyst",
+    tagline: "You take things apart to understand exactly how they work.",
+    desc: "Malware analysts reverse-engineer malicious software to understand precisely how it operates, what it targets, and how to stop it. This is deep, methodical technical work — perfect if you enjoy precision, structure, and getting to the exact root of a problem.",
+    responsibilities: [
+      "Reverse-engineer malware samples in isolated environments",
+      "Identify behaviour patterns and indicators of compromise",
+      "Write detection signatures for security tools",
+      "Document findings for threat intelligence teams"
+    ],
+    certs: [
+      { name: "GIAC GREM",   url: "https://www.giac.org/certifications/reverse-engineering-malware-grem/" },
+      { name: "PMAT",         url: "https://tcm-sec.com/p/practical-malware-analysis-triage" },
+      { name: "OSCE3",        url: "https://www.offsec.com/courses/osce3/" },
+      { name: "eCMAP",        url: "https://ine.com/certify/ecmap" },
+      { name: "GIAC GCFA",   url: "https://www.giac.org/certifications/certified-forensic-analyst-gcfa/" },
+      { name: "CompTIA CySA+", url: "https://www.comptia.org/certifications/cybersecurity-analyst" }
+    ],
+    freeResources: [
+      { name: "TryHackMe — Malware Analysis Rooms",       note: "Free guided introduction to reverse engineering",         url: "https://tryhackme.com/module/malware-analysis-introduction" },
+      { name: "CyberDefenders — Malware Traffic Analysis", note: "Free real-world malware sample analysis challenges",      url: "https://cyberdefenders.org/" },
+      { name: "VirusTotal & YARA Documentation",           note: "Free open-source analysis tools used industry-wide",      url: "https://docs.virustotal.com/" },
+      { name: "MalwareTech Blog & Tutorials",              note: "Free deep-dive reverse engineering walkthroughs",         url: "https://www.malwaretech.com/" },
+      { name: "Practical Malware Analysis — Free Labs",    note: "Companion labs to the well-known PMA textbook",           url: "https://practicalmalwareanalysis.com/" }
+    ]
+  }
+};
+
+//------------------------------------- QUESTIONS (unchanged) -------------------------------------
+const QUESTIONS = [
+  {
+    tag: "Problem-Solving Style",
+    text: "When you're given a tricky problem with no clear answer, what's your instinct?",
+    options: [
+      { text: "Start poking at it immediately — try things until something breaks or works", points: { aggression: 2 } },
+      { text: "Watch and observe first, looking for patterns before acting",                  points: { vigilance: 2 } },
+      { text: "Research it thoroughly — I want to understand every detail before moving",     points: { curiosity: 2 } },
+      { text: "Step back and map out the whole picture before touching anything",             points: { systems: 2 } }
+    ]
+  },
+  {
+    tag: "Scenario",
+    text: "Your company's website just went down unexpectedly. What's the first thing on your mind?",
+    options: [
+      { text: "Could someone have caused this on purpose? Let's check for an attack",             points: { aggression: 1, vigilance: 1 } },
+      { text: "Let's check the logs in real time to catch exactly what's happening right now",    points: { vigilance: 2 } },
+      { text: "I want to dig into what changed recently to cause this",                           points: { curiosity: 2 } },
+      { text: "Let's see which part of the infrastructure failed and why",                        points: { systems: 2 } }
+    ]
+  },
+  {
+    tag: "Ideal Workday",
+    text: "Which of these sounds most like a satisfying day at work?",
+    options: [
+      { text: "Actively trying to break into a system, with full permission, to expose flaws", points: { aggression: 2 } },
+      { text: "Watching dashboards, spotting anomalies, and reacting fast",                    points: { vigilance: 2 } },
+      { text: "Going deep into a single complex case until I fully understand it",             points: { curiosity: 2 } },
+      { text: "Explaining a complicated risk clearly so leadership can make a decision",       points: { communication: 2 } }
+    ]
+  },
+  {
+    tag: "Scenario",
+    text: "You discover a suspicious file on a company server. What's your move?",
+    options: [
+      { text: "Try running it safely in an isolated sandbox to see what it actually does",  points: { aggression: 1, precision: 1 } },
+      { text: "Immediately flag it and check if it matches any recent alerts",              points: { vigilance: 2 } },
+      { text: "Reverse engineer it to understand exactly what it was built to do",          points: { precision: 2 } },
+      { text: "Isolate the server first, then assess what else might be affected",          points: { systems: 2 } }
+    ]
+  },
+  {
+    tag: "Strengths",
+    text: "Which of these would your friends say is your strongest natural skill?",
+    options: [
+      { text: "Thinking like someone trying to break or exploit something",      points: { aggression: 2 } },
+      { text: "Staying calm and noticing small details others miss",             points: { vigilance: 2 } },
+      { text: "Going deep into research until I have real answers",              points: { curiosity: 2 } },
+      { text: "Explaining complicated things in a way anyone can understand",   points: { communication: 2 } }
+    ]
+  },
+  {
+    tag: "Working Style",
+    text: "How do you prefer to work day to day?",
+    options: [
+      { text: "Independently, with the freedom to experiment and try my own approach", points: { aggression: 1, curiosity: 1 } },
+      { text: "As part of a team, reacting together to live situations",               points: { vigilance: 2 } },
+      { text: "Solo, on long deep-dives into one complex problem",                     points: { curiosity: 1, precision: 1 } },
+      { text: "Collaboratively, in planning and architecture discussions",             points: { systems: 2 } }
+    ]
+  },
+  {
+    tag: "Interests",
+    text: "Which type of activity sounds most interesting to you?",
+    options: [
+      { text: "Testing systems by trying to find a way past their defences",   points: { aggression: 2 } },
+      { text: "Watching live activity for anything unusual or out of place",   points: { vigilance: 2 } },
+      { text: "Recovering and piecing together evidence from a past event",    points: { curiosity: 2 } },
+      { text: "Designing infrastructure that's secure from the ground up",     points: { systems: 2 } }
+    ]
+  },
+  {
+    tag: "Risk Tolerance",
+    text: "How do you feel about uncertainty and ambiguity in your work?",
+    options: [
+      { text: "I enjoy it — uncertainty usually means there's something interesting to find", points: { aggression: 1, curiosity: 1 } },
+      { text: "I manage it by staying alert and ready to adapt quickly",                      points: { vigilance: 2 } },
+      { text: "I prefer structured investigation that leads to clear, provable answers",      points: { precision: 2 } },
+      { text: "I'd rather plan ahead to reduce risk before it becomes a problem",            points: { systems: 1, precision: 1 } }
+    ]
+  },
+  {
+    tag: "Communication",
+    text: "How do you feel about explaining a complex problem to someone non-technical?",
+    options: [
+      { text: "Not my favourite — I'd rather stay hands-on with the technical side",                   points: { aggression: 1, precision: 1 } },
+      { text: "I'm fine with it when needed, especially explaining what's happening right now",        points: { vigilance: 1, communication: 1 } },
+      { text: "I enjoy writing it up properly so the full picture is clear",                           points: { curiosity: 1, precision: 1 } },
+      { text: "I genuinely enjoy it — making complex things easy to understand is a strength",        points: { communication: 2 } }
+    ]
+  },
+  {
+    tag: "Motivation",
+    text: "What would motivate you most in a long-term cybersecurity career?",
+    options: [
+      { text: "The challenge of finding what others can't",                       points: { aggression: 2 } },
+      { text: "Protecting real people and systems from harm, in real time",       points: { vigilance: 2 } },
+      { text: "Uncovering the full truth behind how something happened",          points: { curiosity: 2 } },
+      { text: "Helping people make smart, well-informed decisions",               points: { communication: 2 } }
+    ]
+  }
+];
+
+// ---- STATE ----
+let currentQ = 0;
+const answers = new Array(QUESTIONS.length).fill(null);
+const scores = { aggression: 0, vigilance: 0, curiosity: 0, systems: 0, communication: 0, precision: 0 };
+
+// ---- DOM REFS ----
+const heroSection   = document.getElementById('heroSection');
+const startBtn      = document.getElementById('startBtn');
+const progressShell = document.getElementById('progressShell');
+const progFill      = document.getElementById('progFill');
+const progNum       = document.getElementById('progNum');
+const quizMain      = document.getElementById('quizMain');
+const resultsMain   = document.getElementById('resultsMain');
+const resultsBlock  = document.getElementById('resultsBlock');
+
+// ---- START QUIZ ----
+startBtn.addEventListener('click', () => {
+  heroSection.style.display = 'none';
+  progressShell.style.display = 'block';
+  quizMain.classList.add('active');
+  renderQuestion(0);
+});
+
+// ---- RENDER QUESTION ----
+function renderQuestion(index) {
+  currentQ = index;
+  const q = QUESTIONS[index];
+  progNum.textContent = index + 1;
+  progFill.style.width = (((index + 1) / QUESTIONS.length) * 100) + '%';
+
+  const letters = ['A', 'B', 'C', 'D'];
+  const optionsHtml = q.options.map((opt, i) => {
+    const isSelected = answers[index] === i;
+    return `
+      <button class="opt${isSelected ? ' selected' : ''}" data-index="${i}" type="button">
+        <span class="opt-letter">${letters[i]}</span><span class="opt-text">${opt.text}</span>
+      </button>`;
+  }).join('');
+
+  quizMain.innerHTML = `
+    <div class="q-card">
+      <div class="q-head">
+        <div class="q-num">${index + 1}</div>
+        <div class="q-tag">${q.tag}</div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.text}</div>
+        <div class="options">${optionsHtml}</div>
+        <div class="nav-row">
+          <button class="nav-btn" id="backBtn" ${index === 0 ? 'disabled' : ''} type="button">← Back</button>
+          <button class="nav-btn primary" id="nextBtn" ${answers[index] === null ? 'disabled' : ''} type="button">
+            ${index === QUESTIONS.length - 1 ? 'See My Result →' : 'Next →'}
+          </button>
+        </div>
+      </div>
+    </div>`;
+  attachQuestionHandlers(index);
+}
+
+function selectOption(index, choiceIndex) {
+  answers[index] = choiceIndex;
+  quizMain.querySelectorAll('.opt').forEach(btn => {
+    btn.classList.toggle('selected', parseInt(btn.dataset.index, 10) === choiceIndex);
+  });
+  const nextBtn = document.getElementById('nextBtn');
+  if (nextBtn) nextBtn.disabled = false;
+}
+
+function attachQuestionHandlers(index) {
+  quizMain.querySelectorAll('.opt').forEach(btn => {
+    btn.addEventListener('click', () => selectOption(index, parseInt(btn.dataset.index, 10)));
+  });
+  document.getElementById('backBtn').addEventListener('click', () => {
+    if (index > 0) { renderQuestion(index - 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  });
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    if (answers[index] === null) return;
+    if (index < QUESTIONS.length - 1) { renderQuestion(index + 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    else finishQuiz();
+  });
+}
+
+// ---- FINISH ----
+function finishQuiz() {
+  Object.keys(scores).forEach(k => scores[k] = 0);
+  answers.forEach((choiceIndex, qIndex) => {
+    Object.entries(QUESTIONS[qIndex].options[choiceIndex].points).forEach(([t, v]) => scores[t] += v);
+  });
+  let topTrait = 'aggression', topScore = -1;
+  Object.entries(scores).forEach(([t, v]) => { if (v > topScore) { topScore = v; topTrait = t; } });
+  progressShell.style.display = 'none';
+  quizMain.classList.remove('active');
+  renderResults(topTrait);
+  resultsMain.style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ---- RENDER RESULTS ----
+function renderResults(topTrait) {
+  const career = CAREERS[topTrait];
+  const maxPossible = Math.max(...Object.values(scores), 1);
+
+  const traitBarsHtml = Object.entries(scores).sort((a, b) => b[1] - a[1]).map(([trait, val]) => {
+    const pct = Math.round((val / maxPossible) * 100);
+    return `<div class="trait-row">
+      <div class="trait-name">${TRAITS[trait]}</div>
+      <div class="trait-track"><div class="trait-fill" data-pct="${pct}" style="width:0%"></div></div>
+      <div class="trait-pct">${val} pt</div>
+    </div>`;
+  }).join('');
+
+  const respHtml = career.responsibilities.map(r => `<li>${r}</li>`).join('');
+
+  // CHANGE 2: render certs as clickable <a> tags
+  const certHtml = career.certs.map(c =>
+    `<a class="cert-item" href="${c.url}" target="_blank" rel="noopener noreferrer">${c.name}</a>`
+  ).join('');
+
+  // CHANGE 2: render resources as clickable <a> tags
+  const resourceHtml = career.freeResources.map(r => `
+    <a class="resource-item" href="${r.url}" target="_blank" rel="noopener noreferrer">
+      <div class="resource-icon">📘</div>
+      <div>
+        <div class="resource-name">${r.name}</div>
+        <div class="resource-note">${r.note}</div>
+      </div>
+    </a>`).join('');
+
+  resultsBlock.innerHTML = `
+    <div class="result-hero">
+      <div class="result-icon">${career.icon}</div>
+      <div class="result-eyebrow">Your Recommended Path</div>
+      <div class="result-title">${career.title}</div>
+      <p class="result-desc"><strong>${career.tagline}</strong><br><br>${career.desc}</p>
+    </div>
+    <div class="result-section">
+      <div class="result-section-head"><h3>Key Responsibilities</h3></div>
+      <div class="result-section-body"><ul class="resp-list">${respHtml}</ul></div>
+    </div>
+    <div class="result-section">
+      <div class="result-section-head"><h3>Suggested Certifications</h3></div>
+      <div class="result-section-body"><div class="cert-grid">${certHtml}</div></div>
+    </div>
+    <div class="result-section">
+      <div class="result-section-head"><h3>Free Resources to Get Started</h3></div>
+      <div class="result-section-body"><div class="resource-list">${resourceHtml}</div></div>
+    </div>
+    <div class="result-section">
+      <div class="result-section-head"><h3>Your Trait Breakdown</h3></div>
+      <div class="result-section-body"><div class="trait-bars">${traitBarsHtml}</div></div>
+    </div>
+    <button class="retake-btn" id="retakeBtn" type="button">↺ Retake the Quiz</button>`;
+
+  resultsBlock.classList.add('active');
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      resultsBlock.querySelectorAll('.trait-fill').forEach(bar => { bar.style.width = bar.dataset.pct + '%'; });
+    }, 100);
+  });
+  document.getElementById('retakeBtn').addEventListener('click', () => {
+    answers.fill(null);
+    resultsMain.style.display = 'none';
+    resultsBlock.classList.remove('active');
+    heroSection.style.display = 'flex';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+resultsMain.style.display = 'none';
+</script>
+</body>
+</html>
