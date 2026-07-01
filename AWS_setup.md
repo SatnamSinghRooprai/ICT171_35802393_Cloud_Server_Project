@@ -44,20 +44,20 @@ Setup Elastic IP:
 ## 3. Connect to EC2 instance on AWS
 - Click on the connect button present on the top of the instance panel on AWS. Once you  enter the Virtual Machine terminal follow the below given commands to successfully setup this server. 
 
-```Preparing the server
+## 3.1 Preparing the server
 sudo apt update
 sudo apt upgrade -y
 
-```Installing Apache2 Web Server
+## 3.2 Installing Apache2 Web Server
 sudo apt install apache2 -y
 
-Enable Apache on Boot
+## 3.3 Enable Apache on Boot
 sudo systemctl enable apache2
 
-```Start Apache
+## 3.4 Start Apache
 sudo sytemctl start apache2
 
-```Verify Apache Status
+## 3.5 Verify Apache Status
 systemctl status apache2
 
 ```
