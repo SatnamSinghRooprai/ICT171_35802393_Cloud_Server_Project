@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CyberPath — Find Your Cybersecurity Career</title>
+<title>CyberPath - Find Your Cybersecurity Career</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -26,7 +26,6 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
 
-  /* ── CHANGE 1: body is a flex column so hero fills remaining height ── */
   body {
     font-family: var(--sans);
     background: var(--bg);
@@ -81,14 +80,12 @@
   header.hero {
     position: relative;
     overflow: hidden;
-    /* CHANGE 1a: fill remaining viewport height */
     flex: 1;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* CHANGE 1b: generous side margins */
     padding: 64px 48px;
     text-align: center;
     background: radial-gradient(ellipse 100% 70% at 50% -10%, #111a3a 0%, var(--bg) 65%);
@@ -118,7 +115,6 @@
     text-transform: uppercase; color: var(--indigo); margin-bottom: 18px; display: block;
   }
 
-  /* CHANGE 1c: larger headline */
   header.hero h1 {
     font-family: var(--display);
     font-size: clamp(2.4rem, 8vw, 4rem);
@@ -126,7 +122,6 @@
   }
   header.hero h1 em { font-style: normal; color: var(--violet); }
 
-  /* CHANGE 1d: wider, larger subtitle */
   .hero-sub {
     margin-top: 20px;
     font-size: 1.08rem;
@@ -137,7 +132,6 @@
     line-height: 1.7;
   }
 
-  /* CHANGE 1e: larger CTA button */
   .start-btn {
     margin-top: 40px;
     background: linear-gradient(135deg, var(--indigo), #4f46e5);
@@ -213,7 +207,6 @@
   }
   .options { display: flex; flex-direction: column; gap: 10px; }
 
-  /* CHANGE 1f: options are flex rows so letter badge + text always align */
   .opt {
     display: flex;
     align-items: flex-start;
@@ -244,7 +237,6 @@
   }
   .opt.selected .opt-letter { background: var(--indigo); border-color: var(--indigo); color: white; }
 
-  /* text wraps cleanly to its own column, never under the badge */
   .opt-text { flex: 1; }
 
   /* ═══ NAV CONTROLS ═══ */
@@ -304,7 +296,6 @@
   .resp-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 0.88rem; color: var(--text); }
   .resp-list li::before { content: '→'; color: var(--violet); font-weight: 700; flex-shrink: 0; }
 
-  /* CHANGE 2a: cert grid fits 3 per row, items are clickable anchor tags */
   .cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .cert-item {
     display: flex; align-items: center; justify-content: center;
@@ -316,7 +307,6 @@
   }
   .cert-item:hover { border-color: var(--indigo); background: var(--indigo-dim); transform: translateY(-2px); }
 
-  /* CHANGE 2b: resource items are clickable anchor tags */
   .resource-list { display: flex; flex-direction: column; gap: 12px; }
   .resource-item {
     display: flex; gap: 12px; align-items: flex-start;
@@ -342,6 +332,61 @@
   }
   .trait-pct { width: 38px; text-align: right; font-size: 0.78rem; color: var(--muted); font-variant-numeric: tabular-nums; flex-shrink: 0; }
 
+  /* ═══ CAREER ROADMAP (NEW) ═══ */
+  .roadmap { position: relative; display: flex; flex-direction: column; }
+  .roadmap-step {
+    position: relative;
+    display: flex;
+    gap: 18px;
+    padding-bottom: 30px;
+  }
+  .roadmap-step:last-child { padding-bottom: 0; }
+  .roadmap-line {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .roadmap-dot {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--indigo-dim); border: 1.5px solid var(--indigo);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; font-weight: 700; color: var(--violet);
+    font-family: var(--display);
+    flex-shrink: 0; z-index: 1;
+  }
+  .roadmap-step:last-child .roadmap-dot {
+    background: linear-gradient(135deg, var(--indigo), #4f46e5);
+    color: white; border-color: var(--indigo);
+    box-shadow: 0 0 0 4px rgba(99,102,241,0.15);
+  }
+  .roadmap-connector {
+    width: 2px;
+    flex: 1;
+    background: linear-gradient(180deg, var(--indigo) 0%, var(--border) 100%);
+    margin-top: 2px;
+  }
+  .roadmap-content { flex: 1; padding-top: 3px; }
+  .roadmap-time {
+    display: inline-block;
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--indigo);
+    background: var(--indigo-dim); border: 1px solid rgba(99,102,241,0.3);
+    border-radius: 5px; padding: 3px 9px; margin-bottom: 8px;
+  }
+  .roadmap-title {
+    font-family: var(--display); font-size: 1rem; font-weight: 700;
+    color: var(--white); margin-bottom: 6px; letter-spacing: -0.01em;
+  }
+  .roadmap-desc { font-size: 0.87rem; color: var(--text); line-height: 1.6; margin-bottom: 10px; }
+  .roadmap-tasks { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .roadmap-tasks li {
+    display: flex; gap: 9px; align-items: flex-start;
+    font-size: 0.82rem; color: var(--muted); line-height: 1.5;
+  }
+  .roadmap-tasks li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+
   .retake-btn {
     align-self: center; margin-top: 6px; background: transparent;
     border: 1px solid var(--border); color: var(--muted);
@@ -364,6 +409,8 @@
     .cert-grid { grid-template-columns: 1fr 1fr; }
     .q-body { padding: 20px 18px; }
     .trait-name { width: 100px; font-size: 0.74rem; }
+    .roadmap-step { gap: 12px; }
+    .roadmap-dot { width: 28px; height: 28px; font-size: 0.75rem; }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -386,9 +433,9 @@
       <div class="compass-ring"></div>
       <div class="compass-inner">🧭</div>
     </div>
-    <span class="eyebrow">CyberPath — Career Discovery Quiz</span>
+    <span class="eyebrow">CyberPath - Career Discovery Quiz</span>
     <h1>Find Your <em>Cybersecurity</em> Career</h1>
-    <p class="hero-sub">10 quick questions about how you think, solve problems, and like to work. No prior security knowledge required — just answer honestly.</p>
+    <p class="hero-sub">10 quick questions about how you think, solve problems, and like to work. No prior security knowledge required - just answer honestly. "Satnam Singh Rooprai - 35802393"</p>
     <button class="start-btn" id="startBtn">Start the Quiz →</button>
     <div class="meta-bar">
       <div class="chip">⏱ ~5 minutes</div>
@@ -419,8 +466,6 @@ const TRAITS = {
   precision:     "Precision"
 };
 
-// CHANGE 2: certs now have { name, url } — 6 per career
-//           freeResources now have { name, note, url } — 5 per career
 const CAREERS = {
   aggression: {
     icon: "🔴",
@@ -442,18 +487,70 @@ const CAREERS = {
       { name: "CPENT",             url: "https://www.eccouncil.org/train-certify/certified-penetration-testing-professional-cpent/" }
     ],
     freeResources: [
-      { name: "TryHackMe — Jr Penetration Tester Path", note: "Guided rooms mapped closely to PenTest+ objectives",        url: "https://tryhackme.com/path/outline/jrpenetrationtester" },
-      { name: "Professor Messer — PenTest+ Video Series", note: "Free full video course on YouTube",                        url: "https://www.professormesser.com/pentest-plus/pt0-002/pt0-002-video/pt0-002-training-course/" },
-      { name: "OverTheWire — Bandit Wargame",             note: "Builds core Linux & command line skills",                  url: "https://overthewire.org/wargames/bandit/" },
+      { name: "TryHackMe - Jr Penetration Tester Path", note: "Guided rooms mapped closely to PenTest+ objectives",        url: "https://tryhackme.com/path/outline/jrpenetrationtester" },
+      { name: "Professor Messer - PenTest+ Video Series", note: "Free full video course on YouTube",                        url: "https://www.professormesser.com/pentest-plus/pt0-002/pt0-002-video/pt0-002-training-course/" },
+      { name: "OverTheWire - Bandit Wargame",             note: "Builds core Linux & command line skills",                  url: "https://overthewire.org/wargames/bandit/" },
       { name: "HackTheBox Academy",                       note: "Free beginner offensive security modules",                 url: "https://academy.hackthebox.com/" },
       { name: "PortSwigger Web Security Academy",         note: "Free, industry-standard web application pen testing labs", url: "https://portswigger.net/web-security" }
+    ],
+    roadmap: [
+      {
+        time: "Months 0–3",
+        title: "Build the Foundations",
+        desc: "Get comfortable with networking, operating systems, and the Linux command line before touching offensive tools.",
+        tasks: [
+          "Learn TCP/IP, DNS, and how the web actually works",
+          "Get hands-on with Linux (Bandit wargame is a great start)",
+          "Pick up basic scripting in Python or Bash"
+        ]
+      },
+      {
+        time: "Months 3–6",
+        title: "Learn Offensive Fundamentals",
+        desc: "Start exploring how systems are attacked in safe, legal lab environments.",
+        tasks: [
+          "Work through TryHackMe's Jr Penetration Tester path",
+          "Study for and sit CompTIA Security+ as a baseline credential",
+          "Practice on beginner HackTheBox Academy modules"
+        ]
+      },
+      {
+        time: "Months 6–12",
+        title: "Specialise & Get Certified",
+        desc: "Deepen your exploitation skills and earn a certification that proves it.",
+        tasks: [
+          "Complete PortSwigger's Web Security Academy",
+          "Sit CompTIA PenTest+ or eJPT",
+          "Build a portfolio of documented CTF write-ups"
+        ]
+      },
+      {
+        time: "Year 1–2",
+        title: "Land Your First Role",
+        desc: "Apply for junior pentest, red team, or security analyst roles while continuing to build depth.",
+        tasks: [
+          "Apply for Junior Penetration Tester / Red Team roles",
+          "Start working toward OSCP",
+          "Contribute to open-source security tooling or bug bounty programs"
+        ]
+      },
+      {
+        time: "Year 2+",
+        title: "Grow Into Seniority",
+        desc: "Take on more complex engagements and start mentoring or specialising further.",
+        tasks: [
+          "Earn OSCP or GIAC GPEN",
+          "Lead full-scope engagements independently",
+          "Specialise in an area like cloud, mobile, or red teaming"
+        ]
+      }
     ]
   },
   vigilance: {
     icon: "🔵",
     title: "SOC Analyst",
     tagline: "You stay calm and catch what others miss.",
-    desc: "Security Operations Centre (SOC) Analysts are the first line of defence — monitoring networks in real time, spotting unusual activity, and responding fast when something looks wrong. If you're detail-oriented and thrive under pressure, this role puts you right at the centre of the action.",
+    desc: "Security Operations Centre (SOC) Analysts are the first line of defence - monitoring networks in real time, spotting unusual activity, and responding fast when something looks wrong. If you're detail-oriented and thrive under pressure, this role puts you right at the centre of the action.",
     responsibilities: [
       "Monitor security alerts and network traffic around the clock",
       "Investigate suspicious activity and escalate real threats",
@@ -469,11 +566,63 @@ const CAREERS = {
       { name: "Splunk Core Certified User", url: "https://www.splunk.com/en_us/training/certification-track/splunk-core-certified-user.html" }
     ],
     freeResources: [
-      { name: "TryHackMe — SOC Level 1 Path",         note: "Dedicated SOC analyst learning path with hands-on labs",   url: "https://tryhackme.com/path/outline/soclevel1" },
-      { name: "LetsDefend — SOC Fundamentals",         note: "Free intro lessons on SIEM, EDR and incident lifecycle",  url: "https://letsdefend.io/" },
-      { name: "CyberDefenders — Blue Team Labs",       note: "Free alert triage and threat hunting challenges",          url: "https://cyberdefenders.org/" },
+      { name: "TryHackMe - SOC Level 1 Path",         note: "Dedicated SOC analyst learning path with hands-on labs",   url: "https://tryhackme.com/path/outline/soclevel1" },
+      { name: "LetsDefend - SOC Fundamentals",         note: "Free intro lessons on SIEM, EDR and incident lifecycle",  url: "https://letsdefend.io/" },
+      { name: "CyberDefenders - Blue Team Labs",       note: "Free alert triage and threat hunting challenges",          url: "https://cyberdefenders.org/" },
       { name: "Splunk Free Training",                   note: "Official free SIEM fundamentals from Splunk",             url: "https://www.splunk.com/en_us/training/free-courses.html" },
-      { name: "Microsoft Learn — SC-200 Path",          note: "Free official Microsoft security operations training",    url: "https://learn.microsoft.com/en-us/training/courses/sc-200t00" }
+      { name: "Microsoft Learn - SC-200 Path",          note: "Free official Microsoft security operations training",    url: "https://learn.microsoft.com/en-us/training/courses/sc-200t00" }
+    ],
+    roadmap: [
+      {
+        time: "Months 0–3",
+        title: "Build the Foundations",
+        desc: "Understand networking, operating systems, and the basics of how attacks unfold.",
+        tasks: [
+          "Learn TCP/IP fundamentals and common attack types",
+          "Get familiar with Windows and Linux logging basics",
+          "Study for CompTIA Security+"
+        ]
+      },
+      {
+        time: "Months 3–6",
+        title: "Learn Monitoring Tools",
+        desc: "Start working hands-on with the SIEM and EDR tools SOC teams rely on daily.",
+        tasks: [
+          "Work through TryHackMe's SOC Level 1 path",
+          "Complete Splunk's free core training",
+          "Practice alert triage on LetsDefend"
+        ]
+      },
+      {
+        time: "Months 6–12",
+        title: "Sharpen Detection Skills",
+        desc: "Build real investigative reps and start thinking like a defender under pressure.",
+        tasks: [
+          "Work through CyberDefenders blue team labs",
+          "Sit CompTIA Security+ if not already done",
+          "Learn the incident response lifecycle end to end"
+        ]
+      },
+      {
+        time: "Year 1–2",
+        title: "Land Your First Role",
+        desc: "Apply for Tier 1 SOC Analyst roles and keep building detection depth.",
+        tasks: [
+          "Apply for SOC Analyst (Tier 1) positions",
+          "Work toward CompTIA CySA+ or Microsoft SC-200",
+          "Get comfortable writing clear incident reports"
+        ]
+      },
+      {
+        time: "Year 2+",
+        title: "Grow Into Seniority",
+        desc: "Move into Tier 2/3 analysis, threat hunting, or SOC leadership.",
+        tasks: [
+          "Earn GIAC GSEC or BTL1",
+          "Take on threat hunting or detection engineering work",
+          "Mentor junior analysts and refine playbooks"
+        ]
+      }
     ]
   },
   curiosity: {
@@ -496,11 +645,63 @@ const CAREERS = {
       { name: "BTL1 (Blue Team Level 1)", url: "https://www.securityblue.team/btl1" }
     ],
     freeResources: [
-      { name: "CyberDefenders — DFIR Challenges",                note: "Free hands-on forensic investigation labs",              url: "https://cyberdefenders.org/" },
-      { name: "Alison — Diploma in Digital Forensic Investigation", note: "Free course covering acquisition & analysis",          url: "https://alison.com/course/diploma-in-forensic-investigation" },
-      { name: "Magnet Forensics — Free Webinars & Tools",        note: "Industry walkthroughs of real DFIR tooling",             url: "https://www.magnetforensics.com/resources/" },
+      { name: "CyberDefenders - DFIR Challenges",                note: "Free hands-on forensic investigation labs",              url: "https://cyberdefenders.org/" },
+      { name: "Alison - Diploma in Digital Forensic Investigation", note: "Free course covering acquisition & analysis",          url: "https://alison.com/course/diploma-in-forensic-investigation" },
+      { name: "Magnet Forensics - Free Webinars & Tools",        note: "Industry walkthroughs of real DFIR tooling",             url: "https://www.magnetforensics.com/resources/" },
       { name: "Autopsy / The Sleuth Kit",                         note: "Free open-source forensic toolkit used industry-wide",  url: "https://www.autopsy.com/" },
       { name: "SANS DFIR Free Resources",                         note: "Posters, cheat sheets and free DFIR webcasts",          url: "https://www.sans.org/digital-forensics-incident-response/" }
+    ],
+    roadmap: [
+      {
+        time: "Months 0–3",
+        title: "Build the Foundations",
+        desc: "Learn how file systems, operating systems, and evidence handling actually work.",
+        tasks: [
+          "Study file systems (NTFS, FAT, ext4) and how data is stored",
+          "Learn the basics of chain of custody and evidence handling",
+          "Get comfortable navigating Windows and Linux internals"
+        ]
+      },
+      {
+        time: "Months 3–6",
+        title: "Learn the Core Tools",
+        desc: "Start working hands-on with the forensic toolkits investigators use daily.",
+        tasks: [
+          "Learn Autopsy and The Sleuth Kit on sample images",
+          "Complete Alison's Digital Forensic Investigation diploma",
+          "Study CompTIA Security+ as a baseline credential"
+        ]
+      },
+      {
+        time: "Months 6–12",
+        title: "Practice Real Investigations",
+        desc: "Build investigative reps on real-world style cases and start documenting findings properly.",
+        tasks: [
+          "Work through CyberDefenders DFIR challenges",
+          "Practice writing clear, evidence-backed investigation reports",
+          "Learn memory and network forensics basics"
+        ]
+      },
+      {
+        time: "Year 1–2",
+        title: "Land Your First Role",
+        desc: "Apply for junior DFIR or incident response roles while deepening technical skill.",
+        tasks: [
+          "Apply for Junior Forensics Analyst / IR roles",
+          "Work toward GIAC GCFA or CHFI",
+          "Get exposure to real incident response engagements"
+        ]
+      },
+      {
+        time: "Year 2+",
+        title: "Grow Into Seniority",
+        desc: "Take on complex, high-stakes cases and specialise in a forensic niche.",
+        tasks: [
+          "Earn EnCE or GIAC GNFA",
+          "Specialise in mobile, cloud, or network forensics",
+          "Lead investigations and mentor junior investigators"
+        ]
+      }
     ]
   },
   systems: {
@@ -524,10 +725,62 @@ const CAREERS = {
     ],
     freeResources: [
       { name: "AWS Skill Builder",                          note: "600+ free official AWS courses including security paths",    url: "https://skillbuilder.aws/" },
-      { name: "Microsoft Learn — AZ-500 Path",             note: "Free guided Azure security engineer learning path",          url: "https://learn.microsoft.com/en-us/credentials/certifications/azure-security-engineer/" },
+      { name: "Microsoft Learn - AZ-500 Path",             note: "Free guided Azure security engineer learning path",          url: "https://learn.microsoft.com/en-us/credentials/certifications/azure-security-engineer/" },
       { name: "AWS Cloud Quest",                            note: "Free gamified hands-on cloud labs from AWS",                url: "https://aws.amazon.com/training/digital/aws-cloud-quest/" },
       { name: "Google Cloud Skills Boost",                  note: "Free cloud security learning paths from Google",            url: "https://www.cloudskillsboost.google/" },
-      { name: "CNCF — Free Cloud Native Security Training", note: "Open-source Kubernetes & cloud security resources",         url: "https://www.cncf.io/training/" }
+      { name: "CNCF - Free Cloud Native Security Training", note: "Open-source Kubernetes & cloud security resources",         url: "https://www.cncf.io/training/" }
+    ],
+    roadmap: [
+      {
+        time: "Months 0–3",
+        title: "Build the Foundations",
+        desc: "Get grounded in networking, Linux, and core cloud computing concepts.",
+        tasks: [
+          "Learn networking fundamentals (VPCs, subnets, firewalls)",
+          "Get comfortable with Linux and basic scripting",
+          "Understand IAM, the backbone of cloud security"
+        ]
+      },
+      {
+        time: "Months 3–6",
+        title: "Learn a Cloud Platform",
+        desc: "Pick one major provider and go deep before branching out.",
+        tasks: [
+          "Work through AWS Skill Builder security modules",
+          "Complete AWS Cloud Quest hands-on labs",
+          "Study for CompTIA Cloud+ or AWS Cloud Practitioner"
+        ]
+      },
+      {
+        time: "Months 6–12",
+        title: "Specialise in Cloud Security",
+        desc: "Move from general cloud knowledge into securing cloud environments specifically.",
+        tasks: [
+          "Complete Microsoft Learn's AZ-500 path",
+          "Practice securing real deployments in a sandbox account",
+          "Learn Infrastructure as Code security basics (Terraform, CloudFormation)"
+        ]
+      },
+      {
+        time: "Year 1–2",
+        title: "Land Your First Role",
+        desc: "Apply for cloud security or DevSecOps roles while building certification depth.",
+        tasks: [
+          "Apply for Cloud Security Engineer / DevSecOps roles",
+          "Earn AWS Security Specialty or AZ-500",
+          "Contribute to CI/CD pipeline security at work or on side projects"
+        ]
+      },
+      {
+        time: "Year 2+",
+        title: "Grow Into Seniority",
+        desc: "Own architecture decisions and lead security across multi-cloud environments.",
+        tasks: [
+          "Earn CCSP or GIAC GCSA",
+          "Lead cloud security architecture reviews",
+          "Mentor teams on secure-by-design practices"
+        ]
+      }
     ]
   },
   communication: {
@@ -550,11 +803,63 @@ const CAREERS = {
       { name: "CGRC",                       url: "https://www.isc2.org/certifications/cgrc" }
     ],
     freeResources: [
-      { name: "Coursera — The GRC Approach to Managing Cybersecurity", note: "Free to audit, Kennesaw State University",                   url: "https://www.coursera.org/learn/grc-cybersecurity" },
-      { name: "Alison — Governance, Risk and Compliance (GRC)",        note: "Free course with certificate option",                         url: "https://alison.com/course/fundamentals-of-governance-risk-and-compliance-grc" },
-      { name: "ISACA — Free GRC Resources & Webinars",                  note: "Industry frameworks and practical guidance from ISACA",       url: "https://www.isaca.org/resources" },
+      { name: "Coursera - The GRC Approach to Managing Cybersecurity", note: "Free to audit, Kennesaw State University",                   url: "https://www.coursera.org/learn/grc-cybersecurity" },
+      { name: "Alison - Governance, Risk and Compliance (GRC)",        note: "Free course with certificate option",                         url: "https://alison.com/course/fundamentals-of-governance-risk-and-compliance-grc" },
+      { name: "ISACA - Free GRC Resources & Webinars",                  note: "Industry frameworks and practical guidance from ISACA",       url: "https://www.isaca.org/resources" },
       { name: "NIST Cybersecurity Framework",                           note: "Free official US risk management framework",                  url: "https://www.nist.gov/cyberframework" },
       { name: "ISO 27001 Free Introduction Guide",                      note: "Free overview of the world's leading security standard",      url: "https://www.iso.org/standard/27001" }
+    ],
+    roadmap: [
+      {
+        time: "Months 0–3",
+        title: "Build the Foundations",
+        desc: "Learn general security concepts and how risk and compliance fit into a business.",
+        tasks: [
+          "Study for CompTIA Security+ to build technical grounding",
+          "Learn the basics of risk management terminology",
+          "Read through the NIST Cybersecurity Framework overview"
+        ]
+      },
+      {
+        time: "Months 3–6",
+        title: "Learn Frameworks & Standards",
+        desc: "Get familiar with the major frameworks GRC work is built around.",
+        tasks: [
+          "Complete Alison's GRC fundamentals course",
+          "Study the ISO 27001 introduction guide",
+          "Learn how audits and control assessments work"
+        ]
+      },
+      {
+        time: "Months 6–12",
+        title: "Practice Applied Risk Thinking",
+        desc: "Start applying frameworks to real or simulated business scenarios.",
+        tasks: [
+          "Complete Coursera's GRC approach to cybersecurity course",
+          "Practice writing risk assessments and policy documents",
+          "Follow ISACA's free resources and webinars"
+        ]
+      },
+      {
+        time: "Year 1–2",
+        title: "Land Your First Role",
+        desc: "Apply for junior GRC or compliance analyst roles and start building credentials.",
+        tasks: [
+          "Apply for GRC Analyst / Compliance Analyst roles",
+          "Work toward CISA or CGRC",
+          "Support internal audits to build hands-on experience"
+        ]
+      },
+      {
+        time: "Year 2+",
+        title: "Grow Into Seniority",
+        desc: "Move into risk leadership, advising executives directly on security posture.",
+        tasks: [
+          "Earn CRISC or CISM",
+          "Lead ISO 27001 or SOC 2 audit programs",
+          "Advise leadership on enterprise risk strategy"
+        ]
+      }
     ]
   },
   precision: {
@@ -582,6 +887,58 @@ const CAREERS = {
       { name: "VirusTotal & YARA Documentation",           note: "Free open-source analysis tools used industry-wide",      url: "https://docs.virustotal.com/" },
       { name: "MalwareTech Blog & Tutorials",              note: "Free deep-dive reverse engineering walkthroughs",         url: "https://www.malwaretech.com/" },
       { name: "Practical Malware Analysis — Free Labs",    note: "Companion labs to the well-known PMA textbook",           url: "https://practicalmalwareanalysis.com/" }
+    ],
+    roadmap: [
+      {
+        time: "Months 0–3",
+        title: "Build the Foundations",
+        desc: "Get solid on operating system internals, assembly basics, and safe lab setup.",
+        tasks: [
+          "Learn how Windows internals and the PE file format work",
+          "Get comfortable reading basic x86 assembly",
+          "Set up an isolated malware analysis sandbox"
+        ]
+      },
+      {
+        time: "Months 3–6",
+        title: "Learn Static & Dynamic Analysis",
+        desc: "Start examining real samples using industry-standard free tools.",
+        tasks: [
+          "Work through TryHackMe's malware analysis rooms",
+          "Learn VirusTotal and YARA rule basics",
+          "Practice with Practical Malware Analysis's free labs"
+        ]
+      },
+      {
+        time: "Months 6–12",
+        title: "Practice Reverse Engineering",
+        desc: "Build real reps analysing samples end-to-end and documenting behaviour.",
+        tasks: [
+          "Complete CyberDefenders malware traffic analysis challenges",
+          "Follow MalwareTech's deep-dive walkthroughs",
+          "Write your own YARA detection rules from analysis"
+        ]
+      },
+      {
+        time: "Year 1–2",
+        title: "Land Your First Role",
+        desc: "Apply for junior malware analyst or threat intel roles while deepening RE skill.",
+        tasks: [
+          "Apply for Junior Malware Analyst / Threat Intel roles",
+          "Work toward PMAT or GIAC GREM",
+          "Build a public portfolio of sample write-ups (safely, sanitised)"
+        ]
+      },
+      {
+        time: "Year 2+",
+        title: "Grow Into Seniority",
+        desc: "Tackle advanced, evasive threats and contribute to the broader research community.",
+        tasks: [
+          "Earn GIAC GREM or OSCE3",
+          "Analyse advanced persistent threat (APT) tooling",
+          "Publish research and mentor junior analysts"
+        ]
+      }
     ]
   }
 };
@@ -592,9 +949,9 @@ const QUESTIONS = [
     tag: "Problem-Solving Style",
     text: "When you're given a tricky problem with no clear answer, what's your instinct?",
     options: [
-      { text: "Start poking at it immediately — try things until something breaks or works", points: { aggression: 2 } },
+      { text: "Start poking at it immediately - try things until something breaks or works", points: { aggression: 2 } },
       { text: "Watch and observe first, looking for patterns before acting",                  points: { vigilance: 2 } },
-      { text: "Research it thoroughly — I want to understand every detail before moving",     points: { curiosity: 2 } },
+      { text: "Research it thoroughly - I want to understand every detail before moving",     points: { curiosity: 2 } },
       { text: "Step back and map out the whole picture before touching anything",             points: { systems: 2 } }
     ]
   },
@@ -662,7 +1019,7 @@ const QUESTIONS = [
     tag: "Risk Tolerance",
     text: "How do you feel about uncertainty and ambiguity in your work?",
     options: [
-      { text: "I enjoy it — uncertainty usually means there's something interesting to find", points: { aggression: 1, curiosity: 1 } },
+      { text: "I enjoy it - uncertainty usually means there's something interesting to find", points: { aggression: 1, curiosity: 1 } },
       { text: "I manage it by staying alert and ready to adapt quickly",                      points: { vigilance: 2 } },
       { text: "I prefer structured investigation that leads to clear, provable answers",      points: { precision: 2 } },
       { text: "I'd rather plan ahead to reduce risk before it becomes a problem",            points: { systems: 1, precision: 1 } }
@@ -672,10 +1029,10 @@ const QUESTIONS = [
     tag: "Communication",
     text: "How do you feel about explaining a complex problem to someone non-technical?",
     options: [
-      { text: "Not my favourite — I'd rather stay hands-on with the technical side",                   points: { aggression: 1, precision: 1 } },
+      { text: "Not my favourite - I'd rather stay hands-on with the technical side",                   points: { aggression: 1, precision: 1 } },
       { text: "I'm fine with it when needed, especially explaining what's happening right now",        points: { vigilance: 1, communication: 1 } },
       { text: "I enjoy writing it up properly so the full picture is clear",                           points: { curiosity: 1, precision: 1 } },
-      { text: "I genuinely enjoy it — making complex things easy to understand is a strength",        points: { communication: 2 } }
+      { text: "I genuinely enjoy it - making complex things easy to understand is a strength",        points: { communication: 2 } }
     ]
   },
   {
@@ -803,12 +1160,10 @@ function renderResults(topTrait) {
 
   const respHtml = career.responsibilities.map(r => `<li>${r}</li>`).join('');
 
-  // CHANGE 2: render certs as clickable <a> tags
   const certHtml = career.certs.map(c =>
     `<a class="cert-item" href="${c.url}" target="_blank" rel="noopener noreferrer">${c.name}</a>`
   ).join('');
 
-  // CHANGE 2: render resources as clickable <a> tags
   const resourceHtml = career.freeResources.map(r => `
     <a class="resource-item" href="${r.url}" target="_blank" rel="noopener noreferrer">
       <div class="resource-icon">📘</div>
@@ -817,6 +1172,25 @@ function renderResults(topTrait) {
         <div class="resource-note">${r.note}</div>
       </div>
     </a>`).join('');
+
+  // NEW: build the roadmap timeline HTML
+  const roadmapHtml = career.roadmap.map((step, i) => {
+    const isLast = i === career.roadmap.length - 1;
+    const taskHtml = step.tasks.map(t => `<li>${t}</li>`).join('');
+    return `
+      <div class="roadmap-step">
+        <div class="roadmap-line">
+          <div class="roadmap-dot">${i + 1}</div>
+          ${isLast ? '' : '<div class="roadmap-connector"></div>'}
+        </div>
+        <div class="roadmap-content">
+          <span class="roadmap-time">${step.time}</span>
+          <div class="roadmap-title">${step.title}</div>
+          <div class="roadmap-desc">${step.desc}</div>
+          <ul class="roadmap-tasks">${taskHtml}</ul>
+        </div>
+      </div>`;
+  }).join('');
 
   resultsBlock.innerHTML = `
     <div class="result-hero">
@@ -828,6 +1202,10 @@ function renderResults(topTrait) {
     <div class="result-section">
       <div class="result-section-head"><h3>Key Responsibilities</h3></div>
       <div class="result-section-body"><ul class="resp-list">${respHtml}</ul></div>
+    </div>
+    <div class="result-section">
+      <div class="result-section-head"><h3>Your Career Roadmap</h3></div>
+      <div class="result-section-body"><div class="roadmap">${roadmapHtml}</div></div>
     </div>
     <div class="result-section">
       <div class="result-section-head"><h3>Suggested Certifications</h3></div>
