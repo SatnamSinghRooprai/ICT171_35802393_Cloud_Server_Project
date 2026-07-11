@@ -131,6 +131,6 @@ This project is licensed under **CC BY 4.0**, allowing sharing and adaptation wi
 
 ## 10. Conclusion
 CyberPath is a practical, cloud‑hosted educational tool that helps users discover cybersecurity career paths based on their thinking style and interests.  
-It demonstrates real‑world cloud deployment skills, web development fundamentals, scripting logic, and professional documentation — all core outcomes of ICT171.
+It demonstrates real‑world cloud deployment skills, web development fundamentals, scripting logic, and professional documentation - all core outcomes of ICT171.
 
 
