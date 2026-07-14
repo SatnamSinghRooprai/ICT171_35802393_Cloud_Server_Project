@@ -1,6 +1,6 @@
 # CyberPath - Cybersecurity Career Discovery Quiz  
 ICT171 Cloud Server Project - 2026  
-Author: Satnam Singh Rooprai\n 
+Author: Satnam Singh Rooprai  
 Student ID - 35802393
 
 ---
