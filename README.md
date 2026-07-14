@@ -127,7 +127,9 @@ A full walkthrough video is included in the repository, showing:
 
 ## 9. License  
 
-© 2026 Satnaam Singh Rooprai — [Licensed under CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) allowing sharing and adaptation with proper attribution.
+
+© 2026 Satnaam Singh Rooprai - Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) allowing sharing and adaptation with proper attribution.
+
 
 ---
 
