@@ -16,7 +16,7 @@ Cybersecurity is a broad field with many specializations, and newcomers often st
 CyberPath addresses this challenge by providing:
 
 - A guided **10‑question quiz**
-- A personalized **career recommendation**
+- A personalized **career recommendation** and **2 year comprehensive roadmap**
 - Suggested **certifications** for beginners
 - Curated **free learning resources**
 - A modern, responsive interface built with HTML, CSS, and JavaScript
