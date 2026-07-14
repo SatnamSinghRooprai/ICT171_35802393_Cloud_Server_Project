@@ -1,5 +1,5 @@
 # AWS EC2 Deployment Documentation  
-CyberPath — ICT171 Cloud Server Project  
+CyberPath - ICT171 Cloud Server Project  
 Satnam Singh Rooprai - 35802393
 
 ------------------------------------------------------------------------------------------------
