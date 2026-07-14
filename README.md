@@ -81,7 +81,7 @@ Apache2 serves the HTML/CSS/JS website.
 A purchased domain is linked to the EC2 Elastic IP.
 
 ### ✔ SSL/TLS Implementation
-The site is secured with HTTPS using a valid certificate.
+The site is secured with HTTPS using a valid SSL certificate.
 
 ### ✔ Scripting Component
 JavaScript powers the quiz logic, scoring system, and dynamic results page.
@@ -102,9 +102,9 @@ Each file provides clear documentation so another ICT171 student could rebuild t
 ## 7. Live Deployment
 The CyberPath website is publicly accessible through:
 
-- **Elastic IP:** 13.50.124.14  
-- **Domain:** pending_domain.com  
-- **Status:** Online and secure (HTTPS enabled)
+- **IP Address:** 13.50.124.14  
+- **Domain:** https://www.cyberpath.space  
+- **Status:** Online and secure (HTTPS enabled with valid SSL certificate)
 
 This demonstrates successful cloud deployment, DNS configuration, and SSL/TLS implementation.
 
@@ -125,7 +125,11 @@ A full walkthrough video is included in the repository, showing:
 
 ---
 
-## 9. License
+## 9. License  
+[![CC BY 4.0](https://shields.io)](http://creativecommons.org/licenses/by/4.0/)
+
+This work is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
+
 This project is licensed under **CC BY 4.0**, allowing sharing and adaptation with proper attribution.
 
 ---
