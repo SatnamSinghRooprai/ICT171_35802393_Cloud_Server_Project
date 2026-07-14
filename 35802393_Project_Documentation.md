@@ -79,9 +79,15 @@ sudo ufw allow 'Apache'
 ```
 4.2 Enable firewall
 ```
-sudo ufw enable
+sudo ufw enable 
 ```
-4.3 check firewall status
+4.3 Allow traffic to HTTP(80) and SSH(22) port
+```
+sudo ufw allow 80/tcp
+sudo ufw allow 22/tcp
+```
+
+4.4 check firewall status
 ```
 sudo ufw status
 ```
