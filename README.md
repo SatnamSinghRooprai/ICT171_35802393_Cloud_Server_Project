@@ -41,8 +41,9 @@ These traits are mapped to cybersecurity roles including:
 - SOC Analyst  
 - Penetration Tester  
 - Cloud Security Specialist  
-- Digital Forensics Analyst  
+- Digital Forensics Investigator 
 - Governance, Risk & Compliance (GRC)
+- Malware Analyst
 
 Each result includes:
 
