@@ -130,6 +130,6 @@ A full walkthrough video is included in the repository, showing:
 
 ## 9. Conclusion
 CyberPath is a practical, cloud‑hosted educational tool that helps users discover cybersecurity career paths based on their thinking style and interests.  
-It demonstrates real‑world cloud deployment skills, configure Linux and Windows server, command line proficiency, web development fundamentals, scripting logic, utilizing GitHub for version control and professional documentation - all core outcomes of ICT171.
+It demonstrates real‑world cloud deployment skills, configure Linux and Windows server, command line proficiency, web development fundamentals, scripting logic, utilizing GitHub for version control and professional documentation - all core outcomes of ICT171/Introduction to Server Environments and Architectures .
 
 
