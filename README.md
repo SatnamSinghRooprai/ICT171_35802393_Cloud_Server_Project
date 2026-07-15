@@ -5,9 +5,9 @@ Student ID - 35802393
 
 
 The CyberPath website is publicly accessible through:  
-IP Address: [13.50.124.14](https://cyberpath.space)  
-Domain: https://www.cyberpath.space  
-Status: Online and secure (HTTPS enabled with valid SSL certificate)
+- IP Address: [13.50.124.14](https://cyberpath.space)  
+- Domain: https://www.cyberpath.space  
+- Status: Online and secure (HTTPS enabled with valid SSL certificate)
 
 
 ## 1. Introduction
