@@ -1,8 +1,11 @@
 # CyberPath - Cybersecurity Career Discovery Website
 ICT171 Cloud Server Project - 2026  
 Author: Satnam Singh Rooprai  
-Student ID - 35802393
-
+Student ID - 35802393  
+The CyberPath website is publicly accessible through:
+**IP Address:** [13.50.124.14](https://cyberpath.space) 
+**Domain:** https://www.cyberpath.space  
+**Status:** Online and secure (HTTPS enabled with valid SSL certificate)
 ---
 
 ## 1. Introduction
@@ -100,18 +103,7 @@ Each file provides clear documentation so another ICT171 student could rebuild t
 
 ---
 
-## 7. Live Deployment
-The CyberPath website is publicly accessible through:
-
-- **IP Address:** [13.50.124.14](https://cyberpath.space) 
-- **Domain:** https://www.cyberpath.space  
-- **Status:** Online and secure (HTTPS enabled with valid SSL certificate)
-
-This demonstrates successful cloud deployment, DNS configuration, and SSL/TLS implementation.
-
----
-
-## 8. Video Explainer
+## 7. Video Explainer
 A full walkthrough video is included in the repository, showing:
 
 - EC2 setup  
@@ -126,7 +118,7 @@ A full walkthrough video is included in the repository, showing:
 
 ---
 
-## 9. License  
+## 8. License  
 
 
 © 2026 Satnam Singh Rooprai - Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)  
@@ -134,7 +126,7 @@ A full walkthrough video is included in the repository, showing:
 
 ---
 
-## 10. Conclusion
+## 9. Conclusion
 CyberPath is a practical, cloud‑hosted educational tool that helps users discover cybersecurity career paths based on their thinking style and interests.  
 It demonstrates real‑world cloud deployment skills, configure Linux and Windows server, command line proficiency, web development fundamentals, scripting logic, utilizing GitHub for version control and professional documentation - all core outcomes of ICT171.
 
