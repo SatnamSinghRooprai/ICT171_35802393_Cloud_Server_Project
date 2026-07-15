@@ -8,7 +8,7 @@ The CyberPath website is publicly accessible through:
 IP Address: [13.50.124.14](https://cyberpath.space)  
 Domain: https://www.cyberpath.space  
 Status: Online and secure (HTTPS enabled with valid SSL certificate)
----
+
 
 ## 1. Introduction
 CyberPath is an interactive, cloud‑hosted quiz designed to help beginners discover which cybersecurity career path best aligns with their personality, interests, and problem‑solving style.  
