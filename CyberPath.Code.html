@@ -4,28 +4,46 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CyberPath - Find Your Cybersecurity Career</title>
+
+<!-- Connect to Google Fonts and load two font families:
+     "Syne" (bold, used for headings/titles) and "Inter" (used for normal body text) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
+  /* ============================================================
+     COLOUR & FONT VARIABLES
+     These are like "settings" for the whole page. Instead of
+     typing the same colour code everywhere, we give it a name
+     here (e.g. --indigo) and reuse that name everywhere else.
+     If we ever want to change the theme, we only edit it here.
+     ============================================================ */
   :root {
-    --bg:         #080d18;
-    --surface:    #0f1829;
-    --surface2:   #151f35;
-    --border:     #1e2d4a;
-    --indigo:     #6366f1;
-    --indigo-dim: rgba(99,102,241,0.12);
-    --violet:     #a78bfa;
-    --green:      #4ade80;
-    --text:       #c8d8f0;
-    --muted:      #5a7090;
-    --white:      #eef4ff;
-    --sans:       'Inter', system-ui, sans-serif;
-    --display:    'Syne', system-ui, sans-serif;
+    --bg:         #080d18; /* main page background - very dark navy */
+    --surface:    #0f1829; /* background for cards/panels sitting on top of the page */
+    --surface2:   #151f35; /* a slightly lighter panel colour, used for headers inside cards */
+    --border:     #1e2d4a; /* colour used for thin outlines around boxes */
+    --indigo:     #6366f1; /* main brand/accent colour (buttons, highlights) */
+    --indigo-dim: rgba(99,102,241,0.12); /* a very faint, see-through version of indigo */
+    --violet:     #a78bfa; /* secondary accent colour, used for highlights/links */
+    --green:      #4ade80; /* used for "success" style checkmarks */
+    --text:       #c8d8f0; /* normal, slightly muted body text colour */
+    --muted:      #5a7090; /* dimmer text colour for less important labels */
+    --white:      #eef4ff; /* near-white colour used for headings so they stand out */
+    --sans:       'Inter', system-ui, sans-serif;   /* body font */
+    --display:    'Syne', system-ui, sans-serif;    /* heading/title font */
   }
 
+  /* Reset default browser spacing so every browser starts from the same
+     blank slate, and make sure padding/borders are included inside an
+     element's width instead of adding extra hidden size. */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* Makes clicking an on-page link (like #section) scroll smoothly
+     instead of jumping instantly. */
   html { scroll-behavior: smooth; }
 
+  /* Base styling for the whole page body */
   body {
     font-family: var(--sans);
     background: var(--bg);
@@ -33,22 +51,27 @@
     line-height: 1.7;
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* stack header, main content, footer vertically */
   }
 
-  /* ═══ STICKY PROGRESS BAR ═══ */
+  /* ============================================================
+     STICKY PROGRESS BAR
+     This is the thin bar at the top of the screen that shows
+     "Question X / 10" and stays visible while scrolling once
+     the quiz has started.
+     ============================================================ */
   .progress-shell {
-    position: sticky;
+    position: sticky;   /* stays pinned to the top of the screen while scrolling */
     top: 0;
-    z-index: 50;
-    background: rgba(8,13,24,0.92);
-    backdrop-filter: blur(8px);
+    z-index: 50;        /* keeps it above other page content */
+    background: rgba(8,13,24,0.92); /* mostly-solid dark background */
+    backdrop-filter: blur(8px);     /* blurs whatever scrolls underneath it */
     border-bottom: 1px solid var(--border);
     padding: 14px 24px;
   }
   .progress-inner {
-    max-width: 720px;
-    margin: 0 auto;
+    max-width: 720px;   /* keeps the bar's content from stretching too wide on big screens */
+    margin: 0 auto;      /* centers it horizontally */
     display: flex;
     align-items: center;
     gap: 16px;
@@ -57,81 +80,95 @@
     font-size: 0.78rem;
     font-weight: 600;
     color: var(--muted);
-    white-space: nowrap;
-    font-variant-numeric: tabular-nums;
+    white-space: nowrap; /* stops "Question 1 / 10" from wrapping onto two lines */
+    font-variant-numeric: tabular-nums; /* keeps numbers the same width so text doesn't jump around */
   }
-  .progress-label span { color: var(--violet); }
+  .progress-label span { color: var(--violet); } /* highlights the current question number */
   .progress-track {
-    flex: 1;
+    flex: 1;              /* fills all remaining horizontal space */
     height: 6px;
     background: var(--surface2);
-    border-radius: 99px;
-    overflow: hidden;
+    border-radius: 99px;  /* fully rounded ends, like a pill shape */
+    overflow: hidden;     /* keeps the fill bar inside the rounded track */
   }
   .progress-fill {
     height: 100%;
-    width: 0%;
+    width: 0%;             /* starts empty; JavaScript updates this as the quiz progresses */
     background: linear-gradient(90deg, var(--indigo), var(--violet));
     border-radius: 99px;
-    transition: width 0.45s cubic-bezier(.4,0,.2,1);
+    transition: width 0.45s cubic-bezier(.4,0,.2,1); /* smooth animation when the bar grows */
   }
 
-  /* ═══ HERO — fills viewport, content centred ═══ */
+  /* ============================================================
+     HERO SECTION
+     This is the big introduction screen shown before the quiz
+     starts - it fills the whole browser window and is centred.
+     ============================================================ */
   header.hero {
     position: relative;
     overflow: hidden;
     flex: 1;
-    min-height: 100vh;
+    min-height: 100vh;   /* fills at least the full height of the screen */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* centres content vertically */
     padding: 64px 48px;
     text-align: center;
+    /* soft glowing gradient behind the text, like a spotlight from above */
     background: radial-gradient(ellipse 100% 70% at 50% -10%, #111a3a 0%, var(--bg) 65%);
     border-bottom: 1px solid var(--border);
   }
 
+  /* The little spinning compass icon above the title */
   .compass { position: relative; width: 88px; height: 88px; margin: 0 auto 32px; }
   .compass-ring {
-    width: 88px; height: 88px; border-radius: 50%;
+    width: 88px; height: 88px; border-radius: 50%; /* makes it a circle */
     border: 2px solid var(--border); position: absolute; top: 0; left: 0;
-    animation: spin 18s linear infinite;
+    animation: spin 18s linear infinite; /* slowly spins forever */
   }
+  /* The small glowing dot sitting on the edge of the compass ring, like a compass needle tip */
   .compass-ring::before {
     content: ''; position: absolute; top: -4px; left: 50%;
     transform: translateX(-50%); width: 7px; height: 7px;
     border-radius: 50%; background: var(--indigo); box-shadow: 0 0 10px var(--indigo);
   }
+  /* The inner circle of the compass that holds the emoji icon */
   .compass-inner {
     position: absolute; inset: 13px; border-radius: 50%;
     background: var(--surface2); border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center; font-size: 1.7rem;
   }
+  /* Defines what "spin" actually does: rotate a full 360 degrees */
   @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
+  /* The small uppercase label above the main heading (e.g. "CYBERPATH...") */
   .eyebrow {
     font-size: 0.78rem; font-weight: 600; letter-spacing: 0.16em;
     text-transform: uppercase; color: var(--indigo); margin-bottom: 18px; display: block;
   }
 
+  /* The big "Find Your Cybersecurity Career" heading */
   header.hero h1 {
     font-family: var(--display);
-    font-size: clamp(2.4rem, 8vw, 4rem);
+    font-size: clamp(2.4rem, 8vw, 4rem); /* text size shrinks/grows with screen width, but stays within limits */
     font-weight: 800; letter-spacing: -0.04em; color: var(--white); line-height: 1.08;
   }
+  /* The word wrapped in <em> (e.g. "Cybersecurity") gets the violet accent colour instead of italics */
   header.hero h1 em { font-style: normal; color: var(--violet); }
 
+  /* The subtitle paragraph underneath the big heading */
   .hero-sub {
     margin-top: 20px;
     font-size: 1.08rem;
     color: var(--muted);
-    max-width: 560px;
+    max-width: 560px;    /* stops the line of text from getting too wide to read comfortably */
     margin-left: auto;
     margin-right: auto;
     line-height: 1.7;
   }
 
+  /* The big "Start the Quiz" button */
   .start-btn {
     margin-top: 40px;
     background: linear-gradient(135deg, var(--indigo), #4f46e5);
@@ -143,14 +180,18 @@
     padding: 18px 48px;
     border-radius: 12px;
     cursor: pointer;
-    box-shadow: 0 8px 28px rgba(99,102,241,0.4);
+    box-shadow: 0 8px 28px rgba(99,102,241,0.4); /* soft glow underneath the button */
     transition: transform 0.15s ease, box-shadow 0.15s ease;
     letter-spacing: 0.01em;
   }
+  /* When the mouse hovers over the button, lift it slightly and make the glow bigger */
   .start-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(99,102,241,0.5); }
+  /* When the button is actively being clicked, push it back down */
   .start-btn:active { transform: translateY(0); }
+  /* Accessibility: show a clear outline when someone tabs to the button using a keyboard */
   .start-btn:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; }
 
+  /* The row of little info "chips" under the button (e.g. "~5 minutes", "10 questions") */
   .meta-bar {
     display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 36px;
   }
@@ -159,19 +200,25 @@
     border-radius: 6px; padding: 6px 16px; font-size: 0.8rem; font-weight: 500; color: var(--muted);
   }
 
-  /* ═══ QUIZ SECTION ═══ */
+  /* ============================================================
+     QUIZ SECTION
+     The container that holds each question card while the
+     quiz is in progress. Hidden by default - only shown once
+     the "active" class is added by JavaScript.
+     ============================================================ */
   main {
     max-width: 720px;
     width: 100%;
     margin: 0 auto;
     padding: 48px 24px 100px;
-    display: none;
+    display: none;          /* hidden until the quiz starts */
     flex-direction: column;
     gap: 18px;
     flex: 1;
   }
-  main.active { display: flex; }
+  main.active { display: flex; } /* JavaScript adds this class to reveal the section */
 
+  /* The card that wraps a single question */
   .q-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -179,16 +226,19 @@
     overflow: hidden;
     opacity: 0;
     transform: translateY(14px);
-    animation: cardIn 0.5s ease forwards;
+    animation: cardIn 0.5s ease forwards; /* makes each new question fade/slide in smoothly */
   }
+  /* The fade-and-slide-up animation used above */
   @keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
 
+  /* The header strip at the top of a question card (question number + category tag) */
   .q-head {
     display: flex; align-items: center; gap: 12px;
     padding: 18px 24px;
     background: var(--surface2);
     border-bottom: 1px solid var(--border);
   }
+  /* The little numbered badge (1, 2, 3...) shown next to each question */
   .q-num {
     width: 30px; height: 30px; border-radius: 8px;
     background: var(--indigo-dim); border: 1px solid rgba(99,102,241,0.3);
@@ -196,17 +246,21 @@
     font-size: 0.8rem; font-weight: 700; color: var(--violet);
     flex-shrink: 0; font-family: var(--display);
   }
+  /* The small category label next to the question number, e.g. "SCENARIO" */
   .q-tag {
     font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--muted);
   }
   .q-body { padding: 26px 26px 22px; }
+  /* The actual question text itself */
   .q-text {
     font-size: 1.08rem; font-weight: 600; color: var(--white);
     margin-bottom: 20px; line-height: 1.5;
   }
+  /* Container that stacks the answer buttons (A, B, C, D) vertically */
   .options { display: flex; flex-direction: column; gap: 10px; }
 
+  /* A single clickable answer option button */
   .opt {
     display: flex;
     align-items: flex-start;
@@ -223,11 +277,13 @@
     transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
     line-height: 1.5;
   }
-  .opt:hover { border-color: rgba(99,102,241,0.5); background: #19233b; }
-  .opt:active { transform: scale(0.99); }
+  .opt:hover { border-color: rgba(99,102,241,0.5); background: #19233b; } /* subtle highlight on hover */
+  .opt:active { transform: scale(0.99); } /* tiny "press down" feeling when clicked */
+  /* Style applied once the user has picked this particular option */
   .opt.selected { border-color: var(--indigo); background: var(--indigo-dim); color: var(--white); }
-  .opt:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+  .opt:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; } /* keyboard accessibility */
 
+  /* The circular "A / B / C / D" letter shown to the left of each option */
   .opt-letter {
     display: inline-flex; align-items: center; justify-content: center;
     width: 22px; height: 22px; border-radius: 50%;
@@ -235,11 +291,14 @@
     font-size: 0.7rem; font-weight: 700; color: var(--muted);
     flex-shrink: 0; margin-top: 1px;
   }
+  /* When an option is selected, colour in its letter badge to match the accent colour */
   .opt.selected .opt-letter { background: var(--indigo); border-color: var(--indigo); color: white; }
 
-  .opt-text { flex: 1; }
+  .opt-text { flex: 1; } /* lets the answer text take up the remaining space next to the letter */
 
-  /* ═══ NAV CONTROLS ═══ */
+  /* ============================================================
+     NAVIGATION CONTROLS (Back / Next buttons under each question)
+     ============================================================ */
   .nav-row {
     display: flex; justify-content: space-between; align-items: center; margin-top: 8px;
   }
@@ -250,24 +309,32 @@
     transition: border-color 0.15s ease, opacity 0.15s ease;
   }
   .nav-btn:hover { border-color: rgba(99,102,241,0.5); }
+  /* Greys out and disables clicking when a button shouldn't be usable yet
+     (e.g. "Back" on the first question, or "Next" before an answer is picked) */
   .nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  /* Special styling for the main "Next" / "See My Result" button so it stands out */
   .nav-btn.primary { background: linear-gradient(135deg, var(--indigo), #4f46e5); border: none; color: white; }
   .nav-btn:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
 
-  /* ═══ RESULTS ═══ */
+  /* ============================================================
+     RESULTS SCREEN
+     Everything shown after the user finishes all 10 questions.
+     ============================================================ */
   .results { display: none; flex-direction: column; gap: 20px; }
-  .results.active { display: flex; }
+  .results.active { display: flex; } /* revealed by JavaScript once the quiz is finished */
 
+  /* The big highlighted box at the top of the results page showing the career title */
   .result-hero {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: 16px; padding: 40px 30px; text-align: center;
     position: relative; overflow: hidden;
   }
+  /* A soft glow effect placed behind the result hero content */
   .result-hero::before {
     content: ''; position: absolute; inset: 0;
     background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(99,102,241,0.15) 0%, transparent 70%);
   }
-  .result-icon { font-size: 3rem; margin-bottom: 14px; position: relative; }
+  .result-icon { font-size: 3rem; margin-bottom: 14px; position: relative; } /* the big emoji icon */
   .result-eyebrow {
     font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em;
     text-transform: uppercase; color: var(--indigo); margin-bottom: 10px; position: relative;
@@ -281,6 +348,8 @@
     max-width: 520px; margin-left: auto; margin-right: auto;
     position: relative; line-height: 1.7;
   }
+  /* A reusable "card" style used for each block on the results page
+     (Responsibilities, Roadmap, Certifications, Resources, Trait Breakdown) */
   .result-section { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
   .result-section-head {
     display: flex; align-items: center; gap: 10px; padding: 14px 22px;
@@ -292,21 +361,24 @@
   }
   .result-section-body { padding: 22px 24px; }
 
+  /* The bullet-point list of "Key Responsibilities" — each item gets a little arrow instead of a dot */
   .resp-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
   .resp-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 0.88rem; color: var(--text); }
   .resp-list li::before { content: '→'; color: var(--violet); font-weight: 700; flex-shrink: 0; }
 
+  /* Grid layout for the certification "chips" (3 per row) */
   .cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .cert-item {
     display: flex; align-items: center; justify-content: center;
     background: var(--surface2); border: 1px solid var(--border);
     border-radius: 9px; padding: 14px 10px; text-align: center;
     font-size: 0.82rem; font-weight: 600; color: var(--white);
-    text-decoration: none;
+    text-decoration: none; /* removes the default underline since these are links */
     transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
   }
   .cert-item:hover { border-color: var(--indigo); background: var(--indigo-dim); transform: translateY(-2px); }
 
+  /* Styling for the list of free learning resources */
   .resource-list { display: flex; flex-direction: column; gap: 12px; }
   .resource-item {
     display: flex; gap: 12px; align-items: flex-start;
@@ -316,15 +388,21 @@
     transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
   }
   .resource-item:hover { border-color: var(--indigo); background: #19233b; transform: translateY(-2px); }
-  .resource-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+  .resource-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; } /* the little book emoji */
   .resource-name { font-size: 0.87rem; font-weight: 600; color: var(--white); }
   .resource-note { font-size: 0.8rem; color: var(--muted); margin-top: 2px; line-height: 1.5; }
 
-  /* trait bars */
+  /* ============================================================
+     TRAIT BARS
+     The horizontal bar chart at the bottom of the results page
+     showing how many points the user scored in each personality
+     trait (Aggression, Vigilance, Curiosity, etc.)
+     ============================================================ */
   .trait-bars { display: flex; flex-direction: column; gap: 12px; }
-  .trait-row { display: flex; align-items: center; gap: 12px; }
+  .trait-row { display: flex; align-items: center; gap: 12px; } /* one row per trait */
   .trait-name { width: 130px; flex-shrink: 0; font-size: 0.8rem; font-weight: 600; color: var(--muted); }
   .trait-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 99px; overflow: hidden; }
+  /* The coloured fill inside each bar - width starts at 0% and is animated in by JavaScript */
   .trait-fill {
     height: 100%; border-radius: 99px;
     background: linear-gradient(90deg, var(--indigo), var(--violet));
@@ -332,15 +410,20 @@
   }
   .trait-pct { width: 38px; text-align: right; font-size: 0.78rem; color: var(--muted); font-variant-numeric: tabular-nums; flex-shrink: 0; }
 
-  /* ═══ CAREER ROADMAP (NEW) ═══ */
+  /* ============================================================
+     CAREER ROADMAP (the step-by-step timeline showing how to
+     grow into the recommended career, from "Months 0-3" through
+     to "Year 2+")
+     ============================================================ */
   .roadmap { position: relative; display: flex; flex-direction: column; }
   .roadmap-step {
     position: relative;
     display: flex;
     gap: 18px;
-    padding-bottom: 30px;
+    padding-bottom: 30px; /* space between one timeline step and the next */
   }
-  .roadmap-step:last-child { padding-bottom: 0; }
+  .roadmap-step:last-child { padding-bottom: 0; } /* no extra space after the final step */
+  /* The vertical column on the left holding the numbered dot and the connecting line */
   .roadmap-line {
     position: relative;
     display: flex;
@@ -348,6 +431,7 @@
     align-items: center;
     flex-shrink: 0;
   }
+  /* The circular numbered dot (1, 2, 3...) marking each stage of the roadmap */
   .roadmap-dot {
     width: 34px; height: 34px; border-radius: 50%;
     background: var(--indigo-dim); border: 1.5px solid var(--indigo);
@@ -356,11 +440,13 @@
     font-family: var(--display);
     flex-shrink: 0; z-index: 1;
   }
+  /* The very last step's dot is styled differently (solid fill + glow) to show it's the "destination" */
   .roadmap-step:last-child .roadmap-dot {
     background: linear-gradient(135deg, var(--indigo), #4f46e5);
     color: white; border-color: var(--indigo);
     box-shadow: 0 0 0 4px rgba(99,102,241,0.15);
   }
+  /* The vertical line connecting one roadmap dot down to the next one */
   .roadmap-connector {
     width: 2px;
     flex: 1;
@@ -368,6 +454,7 @@
     margin-top: 2px;
   }
   .roadmap-content { flex: 1; padding-top: 3px; }
+  /* The small pill showing the time frame, e.g. "MONTHS 0-3" */
   .roadmap-time {
     display: inline-block;
     font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em;
@@ -380,6 +467,7 @@
     color: var(--white); margin-bottom: 6px; letter-spacing: -0.01em;
   }
   .roadmap-desc { font-size: 0.87rem; color: var(--text); line-height: 1.6; margin-bottom: 10px; }
+  /* The checklist of tasks under each roadmap step, each marked with a green tick */
   .roadmap-tasks { list-style: none; display: flex; flex-direction: column; gap: 6px; }
   .roadmap-tasks li {
     display: flex; gap: 9px; align-items: flex-start;
@@ -387,6 +475,7 @@
   }
   .roadmap-tasks li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
 
+  /* The "Retake the Quiz" button at the very bottom of the results page */
   .retake-btn {
     align-self: center; margin-top: 6px; background: transparent;
     border: 1px solid var(--border); color: var(--muted);
@@ -397,6 +486,7 @@
   .retake-btn:hover { border-color: var(--violet); color: var(--violet); }
   .retake-btn:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
 
+  /* Page footer with credits/attribution */
   footer {
     background: var(--surface); border-top: 1px solid var(--border);
     text-align: center; padding: 24px 20px;
@@ -404,14 +494,24 @@
   }
   footer a { color: var(--violet); text-decoration: none; }
 
+  /* ============================================================
+     RESPONSIVE ADJUSTMENTS
+     Extra tweaks applied automatically when the screen is
+     narrow (phones/small tablets, under 600px wide) so
+     everything still fits and reads comfortably.
+     ============================================================ */
   @media (max-width: 600px) {
     header.hero { padding: 48px 24px; }
-    .cert-grid { grid-template-columns: 1fr 1fr; }
+    .cert-grid { grid-template-columns: 1fr 1fr; } /* 2 certificates per row instead of 3 */
     .q-body { padding: 20px 18px; }
     .trait-name { width: 100px; font-size: 0.74rem; }
     .roadmap-step { gap: 12px; }
     .roadmap-dot { width: 28px; height: 28px; font-size: 0.75rem; }
   }
+
+  /* Accessibility: if the user's device settings say "reduce motion",
+     instantly skip all animations/transitions instead of playing them.
+     This helps people who get dizzy or uncomfortable with movement. */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   }
@@ -419,6 +519,8 @@
 </head>
 <body>
 
+  <!-- Sticky progress bar at the top of the screen.
+       Hidden (display:none) until the quiz actually starts. -->
   <div class="progress-shell" id="progressShell" style="display:none;">
     <div class="progress-inner">
       <div class="progress-label">Question <span id="progNum">1</span> / 10</div>
@@ -428,6 +530,7 @@
     </div>
   </div>
 
+  <!-- The welcome / intro screen shown when the page first loads -->
   <header class="hero" id="heroSection">
     <div class="compass">
       <div class="compass-ring"></div>
@@ -444,8 +547,13 @@
     </div>
   </header>
 
+  <!-- Empty container - JavaScript fills this with the current question card
+       once the quiz starts, and replaces its contents each time the user
+       moves to a new question. -->
   <main id="quizMain"></main>
 
+  <!-- Empty container for the final results screen.
+       Stays hidden until finishQuiz() runs at the end of the quiz. -->
   <main id="resultsMain">
     <div class="results" id="resultsBlock"></div>
   </main>
@@ -457,6 +565,12 @@
   </footer>
 
 <script>
+/* ================================================================
+   TRAITS
+   A simple lookup table that turns the short internal codenames
+   used in the scoring system (e.g. "aggression") into the nicer
+   labels shown to the user on screen (e.g. "Aggression").
+   ================================================================ */
 const TRAITS = {
   aggression:    "Aggression",
   vigilance:     "Vigilance",
@@ -466,6 +580,22 @@ const TRAITS = {
   precision:     "Precision"
 };
 
+/* ================================================================
+   CAREERS
+   This is the "database" of all possible quiz results. Each key
+   (aggression, vigilance, curiosity, systems, communication,
+   precision) matches one of the six personality traits above.
+
+   Whichever trait scores the highest by the end of the quiz decides
+   which one of these six career profiles gets shown to the user.
+
+   Each career entry contains:
+     - icon / title / tagline / desc   -> what's shown at the top of the results page
+     - responsibilities                -> bullet list of what the job involves day-to-day
+     - certs                           -> suggested certifications with links
+     - freeResources                   -> free learning links to get started
+     - roadmap                         -> a step-by-step timeline of how to break into the career
+   ================================================================ */
 const CAREERS = {
   aggression: {
     icon: "🔴",
@@ -943,7 +1073,18 @@ const CAREERS = {
   }
 };
 
-//------------------------------------- QUESTIONS (unchanged) -------------------------------------
+/* ================================================================
+   QUESTIONS (content unchanged from the original)
+   This is the actual list of the 10 quiz questions. Each question
+   has:
+     - tag:     a short category label shown above the question
+     - text:    the question itself
+     - options: the 4 possible answers, where each answer awards
+                "points" toward one or more of the six traits
+                defined above. Answering "A" a lot, for example,
+                will push the aggression score up, nudging the
+                final result toward Penetration Tester.
+   ================================================================ */
 const QUESTIONS = [
   {
     tag: "Problem-Solving Style",
@@ -1047,37 +1188,67 @@ const QUESTIONS = [
   }
 ];
 
-// ---- STATE ----
-let currentQ = 0;
+/* ================================================================
+   STATE
+   These variables track where the user currently is in the quiz.
+   ================================================================ */
+let currentQ = 0; // index of the question currently being shown (0 = first question)
+
+// One slot per question, storing which option index (0-3) the user picked.
+// Starts as all "null" (nothing answered yet).
 const answers = new Array(QUESTIONS.length).fill(null);
+
+// Running total of points earned in each trait so far.
+// Gets recalculated from scratch every time the quiz finishes.
 const scores = { aggression: 0, vigilance: 0, curiosity: 0, systems: 0, communication: 0, precision: 0 };
 
-// ---- DOM REFS ----
-const heroSection   = document.getElementById('heroSection');
-const startBtn      = document.getElementById('startBtn');
-const progressShell = document.getElementById('progressShell');
-const progFill      = document.getElementById('progFill');
-const progNum       = document.getElementById('progNum');
-const quizMain      = document.getElementById('quizMain');
-const resultsMain   = document.getElementById('resultsMain');
-const resultsBlock  = document.getElementById('resultsBlock');
+/* ================================================================
+   DOM REFERENCES
+   Grabbing handles to the HTML elements we'll need to
+   read from or write into, so we don't have to look them
+   up again every time.
+   ================================================================ */
+const heroSection   = document.getElementById('heroSection');   // the intro/welcome screen
+const startBtn      = document.getElementById('startBtn');      // "Start the Quiz" button
+const progressShell = document.getElementById('progressShell'); // the sticky top progress bar wrapper
+const progFill      = document.getElementById('progFill');      // the coloured part of the progress bar
+const progNum       = document.getElementById('progNum');       // the "Question X" number text
+const quizMain       = document.getElementById('quizMain');       // container where each question is rendered
+const resultsMain   = document.getElementById('resultsMain');   // container wrapping the results screen
+const resultsBlock  = document.getElementById('resultsBlock');  // where the actual results content gets built
 
-// ---- START QUIZ ----
+/* ================================================================
+   START QUIZ
+   Runs once, when the user clicks "Start the Quiz →".
+   Hides the welcome screen, reveals the progress bar and quiz
+   area, then shows the first question.
+   ================================================================ */
 startBtn.addEventListener('click', () => {
-  heroSection.style.display = 'none';
-  progressShell.style.display = 'block';
-  quizMain.classList.add('active');
-  renderQuestion(0);
+  heroSection.style.display = 'none';     // hide the intro screen
+  progressShell.style.display = 'block';  // show the progress bar
+  quizMain.classList.add('active');       // reveal the quiz question container
+  renderQuestion(0);                      // display the very first question
 });
 
-// ---- RENDER QUESTION ----
+/* ================================================================
+   RENDER QUESTION
+   Builds and displays the HTML for a single question, given its
+   index in the QUESTIONS array. This function runs every time the
+   user moves forward or backward between questions.
+   ================================================================ */
 function renderQuestion(index) {
   currentQ = index;
   const q = QUESTIONS[index];
+
+  // Update the "Question X / 10" label and grow the progress bar to match.
   progNum.textContent = index + 1;
   progFill.style.width = (((index + 1) / QUESTIONS.length) * 100) + '%';
 
   const letters = ['A', 'B', 'C', 'D'];
+
+  // Build the HTML for each answer option. If this option was already
+  // chosen previously (e.g. user clicked "Back" then "Next" again),
+  // mark it as selected so their earlier answer is remembered.
   const optionsHtml = q.options.map((opt, i) => {
     const isSelected = answers[index] === i;
     return `
@@ -1086,6 +1257,10 @@ function renderQuestion(index) {
       </button>`;
   }).join('');
 
+  // Insert the full question card into the page: number, tag, question text,
+  // the list of options, and the Back/Next navigation buttons.
+  // The "Next" button starts disabled until an answer is picked, and its
+  // label changes to "See My Result →" on the very last question.
   quizMain.innerHTML = `
     <div class="q-card">
       <div class="q-head">
@@ -1103,40 +1278,81 @@ function renderQuestion(index) {
         </div>
       </div>
     </div>`;
+
+  // Now that the buttons exist in the page, wire up their click behaviour.
   attachQuestionHandlers(index);
 }
 
+/* ================================================================
+   SELECT OPTION
+   Called when the user clicks one of the answer buttons (A/B/C/D).
+   Saves their choice, visually highlights the selected option, and
+   enables the "Next" button so they can continue.
+   ================================================================ */
 function selectOption(index, choiceIndex) {
-  answers[index] = choiceIndex;
+  answers[index] = choiceIndex; // remember which option was chosen for this question
+
+  // Loop through every option button and add/remove the "selected"
+  // highlight depending on whether it matches the one just clicked.
   quizMain.querySelectorAll('.opt').forEach(btn => {
     btn.classList.toggle('selected', parseInt(btn.dataset.index, 10) === choiceIndex);
   });
+
+  // Once an answer is picked, the "Next" button becomes clickable.
   const nextBtn = document.getElementById('nextBtn');
   if (nextBtn) nextBtn.disabled = false;
 }
 
+/* ================================================================
+   ATTACH QUESTION HANDLERS
+   Connects click events to the answer options and the Back/Next
+   buttons for whichever question is currently on screen. This has
+   to be re-run every time renderQuestion() rebuilds the HTML,
+   because the old buttons (and their listeners) get thrown away.
+   ================================================================ */
 function attachQuestionHandlers(index) {
+  // Clicking any answer option records that choice.
   quizMain.querySelectorAll('.opt').forEach(btn => {
     btn.addEventListener('click', () => selectOption(index, parseInt(btn.dataset.index, 10)));
   });
+
+  // "Back" button: go to the previous question (does nothing on question 1,
+  // since the button is disabled there anyway).
   document.getElementById('backBtn').addEventListener('click', () => {
     if (index > 0) { renderQuestion(index - 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }
   });
+
+  // "Next" button: move to the next question, or if this was the last
+  // question, calculate and show the final results instead.
   document.getElementById('nextBtn').addEventListener('click', () => {
-    if (answers[index] === null) return;
+    if (answers[index] === null) return; // safety check - shouldn't happen since button is disabled until answered
     if (index < QUESTIONS.length - 1) { renderQuestion(index + 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }
     else finishQuiz();
   });
 }
 
-// ---- FINISH ----
+/* ================================================================
+   FINISH QUIZ
+   Runs once the user answers the final question. Tallies up all
+   the points from every answer to work out which trait scored
+   highest, then swaps the quiz screen out for the results screen.
+   ================================================================ */
 function finishQuiz() {
+  // Reset all trait scores back to zero before recalculating,
+  // in case the quiz has been taken more than once in this session.
   Object.keys(scores).forEach(k => scores[k] = 0);
+
+  // Go through every answered question and add its points to the running totals.
   answers.forEach((choiceIndex, qIndex) => {
     Object.entries(QUESTIONS[qIndex].options[choiceIndex].points).forEach(([t, v]) => scores[t] += v);
   });
+
+  // Work out which trait ended up with the highest score -
+  // that's the one used to decide the recommended career.
   let topTrait = 'aggression', topScore = -1;
   Object.entries(scores).forEach(([t, v]) => { if (v > topScore) { topScore = v; topTrait = t; } });
+
+  // Swap the quiz view out for the results view.
   progressShell.style.display = 'none';
   quizMain.classList.remove('active');
   renderResults(topTrait);
@@ -1144,11 +1360,21 @@ function finishQuiz() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ---- RENDER RESULTS ----
+/* ================================================================
+   RENDER RESULTS
+   Builds the entire results page for the winning trait: the hero
+   banner, responsibilities list, roadmap timeline, certification
+   grid, free resource list, and the trait score bar chart.
+   ================================================================ */
 function renderResults(topTrait) {
   const career = CAREERS[topTrait];
+
+  // Used to scale the trait bar chart - the highest-scoring trait
+  // will fill 100% of its bar, and the others are sized relative to it.
   const maxPossible = Math.max(...Object.values(scores), 1);
 
+  // Build the trait score bars, sorted from highest score to lowest,
+  // so the reader can see their top trait at a glance.
   const traitBarsHtml = Object.entries(scores).sort((a, b) => b[1] - a[1]).map(([trait, val]) => {
     const pct = Math.round((val / maxPossible) * 100);
     return `<div class="trait-row">
@@ -1158,12 +1384,15 @@ function renderResults(topTrait) {
     </div>`;
   }).join('');
 
+  // Turn the plain array of responsibility strings into an actual bullet list.
   const respHtml = career.responsibilities.map(r => `<li>${r}</li>`).join('');
 
+  // Turn the certification list into clickable chip links that open in a new tab.
   const certHtml = career.certs.map(c =>
     `<a class="cert-item" href="${c.url}" target="_blank" rel="noopener noreferrer">${c.name}</a>`
   ).join('');
 
+  // Turn the free resources list into clickable cards with a title and description.
   const resourceHtml = career.freeResources.map(r => `
     <a class="resource-item" href="${r.url}" target="_blank" rel="noopener noreferrer">
       <div class="resource-icon">📘</div>
@@ -1173,7 +1402,10 @@ function renderResults(topTrait) {
       </div>
     </a>`).join('');
 
-  // NEW: build the roadmap timeline HTML
+  // Build the roadmap timeline HTML - one numbered step per stage
+  // (e.g. "Months 0-3", "Year 2+"), each with its own checklist.
+  // The very last step doesn't get a connecting line below it, since
+  // there's nothing after it.
   const roadmapHtml = career.roadmap.map((step, i) => {
     const isLast = i === career.roadmap.length - 1;
     const taskHtml = step.tasks.map(t => `<li>${t}</li>`).join('');
@@ -1192,6 +1424,7 @@ function renderResults(topTrait) {
       </div>`;
   }).join('');
 
+  // Assemble everything above into the final results page and insert it into the page.
   resultsBlock.innerHTML = `
     <div class="result-hero">
       <div class="result-icon">${career.icon}</div>
@@ -1222,11 +1455,18 @@ function renderResults(topTrait) {
     <button class="retake-btn" id="retakeBtn" type="button">↺ Retake the Quiz</button>`;
 
   resultsBlock.classList.add('active');
+
+  // Wait one animation frame, then a short 100ms pause, before growing the
+  // trait bars from 0% to their real width - this creates the "filling up"
+  // animation instead of the bars just appearing already full.
   requestAnimationFrame(() => {
     setTimeout(() => {
       resultsBlock.querySelectorAll('.trait-fill').forEach(bar => { bar.style.width = bar.dataset.pct + '%'; });
     }, 100);
   });
+
+  // "Retake the Quiz" button: wipe all previous answers and go back to
+  // the welcome screen so the user can start over from question 1.
   document.getElementById('retakeBtn').addEventListener('click', () => {
     answers.fill(null);
     resultsMain.style.display = 'none';
@@ -1236,6 +1476,8 @@ function renderResults(topTrait) {
   });
 }
 
+// Make sure the results container is hidden the moment the page loads,
+// before the quiz has even started.
 resultsMain.style.display = 'none';
 </script>
 </body>
