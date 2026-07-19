@@ -163,7 +163,7 @@ Route 53 generates four nameservers for your hosted zone (e.g. `ns-1151.awsdns-1
 3. Select **Enter my own nameservers**
 4. Copy each nameserver from Route 53 (excluding the trailing dot `.`)
 5. Click **Save**
-> **Note:** Nameserver propagation typically takes 10 minutes to 4 hours, and up to 48 hours in rare cases. The domain may show errors during this period — this is normal.
+> **Note:** Nameserver propagation typically takes 10 minutes to 4 hours, and up to 48 hours in rare cases. The domain may show errors during this period - this is normal.
  
 ### 6.5 Configure Apache Virtual Host
  
