@@ -119,4 +119,31 @@ sudo systemctl deamon-reload
 sudo systemctl reload apache2
 ```
 
+## 6. DNS Configuring  
+5.1 Accessing the apache2 webpage
+```
+sudo nano /var/www/html/index.html
+```
+5.2 Delete the current code of web-server (optional)
+```
+sudo truncate -s 0 /var/www/html/index.html
+```
+5.3 Create a HTML file and add the code (you can access the code from code.md file in this repository) 
+```
+sudo nano CyberPath.html
+```
+5.4 moving the HTML file to apache2 web-server
+```
+mv CyberPath.html /var/www/html/index.html
+```
+5.5 Reload the server
+```
+sudo systmectl reload apache2
+```
+5.6 If the terminal throughs an error use this command to notify LINUX that a service file has been edited.
+```
+sudo systemctl deamon-reload
+sudo systemctl reload apache2
+```
+
 
