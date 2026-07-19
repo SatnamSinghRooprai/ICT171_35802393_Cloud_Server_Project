@@ -30,9 +30,9 @@ Follow the exact steps to deploy the AWS EC2 Cloud Server
 - Storage: 8–10 GB  
 - Key pair: RSA (`.pem` file)  
 - Security group rules:
-  - SSH (22) — your_IP
-  - HTTP (80) — 0.0.0.0/0
-  - HTTPS (443) — 0.0.0.0/0
+  - SSH (22) - your_IP
+  - HTTP (80) - 0.0.0.0/0
+  - HTTPS (443) - 0.0.0.0/0
 
 Setup Elastic IP:
 - Under the Network & Security tab select Elastic IPs
