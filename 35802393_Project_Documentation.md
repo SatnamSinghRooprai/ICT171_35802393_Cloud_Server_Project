@@ -66,7 +66,7 @@ sudo systemctl enable apache2
 ```
 3.4 Start Apache
 ```
-sudo sytemctl start apache2
+sudo systemctl start apache2
 ```
 3.5 Verify Apache Status
 ```
@@ -75,7 +75,7 @@ systemctl status apache2
 ## 4. Configuring Firewall
 4.1 Allow Apache Traffic
 ```
-sudo ufw allow 'Apache'
+sudo ufw allow 'apache'
 ```
 4.2 Enable firewall
 ```
@@ -111,11 +111,11 @@ mv CyberPath.html /var/www/html/index.html
 ```
 5.5 Reload the server
 ```
-sudo systmectl reload apache2
+sudo systemctl reload apache2
 ```
 5.6 If the terminal throughs an error use this command to notify LINUX that a service file has been edited.
 ```
-sudo systemctl deamon-reload
+sudo systemctl daemon-reload
 sudo systemctl reload apache2
 ```
 ---
