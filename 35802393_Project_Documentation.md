@@ -148,7 +148,7 @@ Purchase your domain from a registrar of your choice. For this project, `cyberpa
  
 Click **Create record** and add the following two records:
  
-**A Record — maps domain to IP address:**
+**A Record - maps domain to IP address:**
  
 | Record name | Record type | Value | TTL | Routing policy |
 |---|---|---|---|---|
@@ -279,7 +279,7 @@ Each of the 10 quiz questions has four answer options. Each option is mapped to 
  
 After the user answers all 10 questions, the algorithm identifies the trait with the highest cumulative score. This dominant trait is then used as a key to look up the matching career profile from the `CAREERS` object, which contains the role description, responsibilities, roadmap, certifications, and free resources for that career.
  
-The result is rendered dynamically into the page without any page reload — the quiz, scoring, and results display are all handled by the same JavaScript file.
+The result is rendered dynamically into the page without any page reload - the quiz, scoring, and results display are all handled by the same JavaScript file.
  
 ### 8.2 Core Scoring Function (Commented)
  
