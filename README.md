@@ -8,7 +8,9 @@ The CyberPath website is publicly accessible through:
 - IP Address: [13.50.124.14](http://13.50.124.14/)  
 - Domain: https://www.cyberpath.space
 
-Status: Online and secure (HTTPS enabled with valid SSL certificate)
+Status: Online and secure (HTTPS enabled with valid SSL certificate)  
+
+Video Explainer: [ICT171_35802393_SatnamSinghRooprai_VideoExplainer](https://murdochuniversity-my.sharepoint.com/:v:/r/personal/35802393_student_murdoch_edu_au/Documents/ICT171_35802393_SatnamSinghRooprai_Video_Explainer.mp4?csf=1&web=1&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=kB5tGM)
 
 
 ## 1. Introduction
