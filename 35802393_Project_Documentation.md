@@ -3,7 +3,7 @@ CyberPath - ICT171 Cloud Server Project
 Satnam Singh Rooprai - 35802393  
 
 The CyberPath website is publicly accessible through:  
-- IP Address: [13.50.124.14](https://cyberpath.space)  
+- IP Address: [13.50.124.14](http://13.50.124.14/)  
 - Domain: https://www.cyberpath.space
 ------------------------------------------------------------------------------------------------
 
