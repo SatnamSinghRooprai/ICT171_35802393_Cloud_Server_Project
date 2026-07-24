@@ -117,9 +117,9 @@ A full walkthrough video is included in the repository, showing:
 - SSL activation  
 - Uploading the website  
 - Running the quiz live  
-- Reviewing documentation  
+- Reviewing documentation
 
-*(Video yet to be added)*
+Video Explainer Link: [ICT171_35802393_SatnamSinghRooprai_VideoExplainer](https://murdochuniversity-my.sharepoint.com/:v:/r/personal/35802393_student_murdoch_edu_au/Documents/ICT171_35802393_SatnamSinghRooprai_Video_Explainer.mp4?csf=1&web=1&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=kB5tGM)
 
 ---
 
