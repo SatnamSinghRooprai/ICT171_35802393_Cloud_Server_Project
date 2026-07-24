@@ -5,6 +5,9 @@ Satnam Singh Rooprai - 35802393
 The CyberPath website is publicly accessible through:  
 - IP Address: [13.50.124.14](http://13.50.124.14/)  
 - Domain: https://www.cyberpath.space
+
+Video Explainer Link: [ICT171_35802393_SatnamSinghRooprai_VideoExplainer](https://murdochuniversity-my.sharepoint.com/:v:/r/personal/35802393_student_murdoch_edu_au/Documents/ICT171_35802393_SatnamSinghRooprai_Video_Explainer.mp4?csf=1&web=1&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=x8N3bP) 
+
 ------------------------------------------------------------------------------------------------
 
 ## 1. Overview
@@ -325,9 +328,9 @@ https://github.com/SatnamSinghRooprai/ICT171_35802393_Cloud_Server_Project/blob/
  
 ## 9. Video Explainer
  
-A full walkthrough video demonstrating the deployment of this project from start to finish is available at:
- 
-*(link will be added here)*
+A full walkthrough video demonstrating the deployment of this project from start to finish is available at:  
+
+Video Explainer Link: [ICT171_35802393_SatnamSinghRooprai_VideoExplainer](https://murdochuniversity-my.sharepoint.com/:v:/r/personal/35802393_student_murdoch_edu_au/Documents/ICT171_35802393_SatnamSinghRooprai_Video_Explainer.mp4?csf=1&web=1&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=x8N3bP)
  
 The video covers:
 - EC2 instance setup and SSH access
