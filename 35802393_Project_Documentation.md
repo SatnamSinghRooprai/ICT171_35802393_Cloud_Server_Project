@@ -138,10 +138,12 @@ Purchase your domain from a registrar of your choice. For this project, `cyberpa
  
 1. In AWS Console, search **Route 53** → **Hosted Zones** → **Create hosted zone**
 2. Fill in the following:
-| Field | Value |
-|---|---|
-| Domain name | cyberpath.space |
-| Type | Public hosted zone |
+
+| Field       | Value              |
+|-------------|--------------------|
+| Domain name | cyberpath.space    |
+| Type        | Public hosted zone |
+
  
 3. Click **Create hosted zone**
 ### 6.3 Create DNS Records
